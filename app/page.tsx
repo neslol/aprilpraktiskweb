@@ -253,8 +253,8 @@ export default function Home() {
 
         {/* Main Hero */}
       <p>Hero background, with heading 1, heading 2 and two clickable texts with right arrows, down arrow at the bottom of the screen. Hero background fills the whole screen.</p>
-      <section className="relative h-screen overflow-hidden bg-[url(https://picsum.photos/1080/1920)] bg-cover text-white text-xl">
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center gap-4">
+      <section className="relative h-screen overflow-hidden bg-[url('/hero.png')] bg-center bg-cover  text-white text-xl">
+        <div className="backdrop-brightness-50 absolute inset-0 flex flex-col items-center justify-center text-center gap-4">
           <h1 className="text-4xl font-bold sm:text-6xl">Gnist</h1>
           <h2 className="text-2xl sm:text-3xl">Et sted for ro, natur, vand og havet</h2>
           <div className="flex flex-col text-center gap-6 mt-4">
