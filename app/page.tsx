@@ -258,7 +258,7 @@ export default function Home() {
           <h1 className="text-4xl font-bold sm:text-6xl">Gnist</h1>
           <h2 className="text-2xl sm:text-3xl">Et sted for ro, natur, vand og havet</h2>
           <div className="flex flex-col text-center gap-6 mt-4">
-            <button className="flex items-center gap-2 text-white px-4 py-2 rounded-full text-lg">
+            <button className="flex items-center gap-2 text-white text-lg">
               Læs mere om Light up forløb
               <svg
                     className="program-chevron h-16 w-16 shrink-0 transition-transform duration-300 rotate-270"
@@ -270,8 +270,8 @@ export default function Home() {
                     <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
             </button>
-            <button className="flex items-center gap-4 text-white px-4 py-2 rounded-full text-lg">
-              Læs mere om 1:1 coaching
+<button className="flex items-center gap-2 text-white rounded-full text-lg text-center">
+  Læs mere om 1:1 coaching
               <svg
                     className="program-chevron h-16 w-16 shrink-0 transition-transform duration-300 rotate-270"
                     viewBox="0 0 24 24"
