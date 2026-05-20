@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+.program-accordion > summary::-webkit-details-marker {
+    display: none;
+}
+
+.program-accordion[open] .program-chevron {
+    transform: rotate(180deg);
+}
+
+
