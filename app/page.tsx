@@ -93,7 +93,7 @@ export default function Home() {
           Hero background, with heading 1 and down arrow. Hero fills the whole
           phone screen.
         </p>
-        <section className="relative h-screen overflow-hidden bg-[url(https://picsum.photos/1080/1920)] bg-cover text-white text-xl">
+        <section className="relative h-screen overflow-hidden bg-[url('/heroCoaching.png')] bg-cover text-white text-xl">
           <h1 className="absolute inset-0 flex items-center justify-center text-center text-4xl">
             Lorem Ipsum
           </h1>
@@ -144,7 +144,7 @@ export default function Home() {
         <p>Section with a title, hr tags to separate, text about when the course starts, then 4 accordions.</p>
         <section className="bg-[#986B3D] text-[#F7EBD8] p-4 text-xl">
           <div className="mx-auto max-w-md px-2 py-4">
-            <h2 className="text-center text-6xl font-normal">Program</h2>
+            <h2 className="text-center text-4xl font-normal">Program</h2>
             <hr className="my-5 border-[#E8D9C8]" />
 
             <p className="text-center leading-tight">
@@ -170,7 +170,7 @@ export default function Home() {
                   </svg>
                 </summary>
                 <div className="pb-6 text-center">
-                  <h3 className="text-5xl font-semibold">Lorem Ipsum</h3>
+                  <h3 className="text-3xl font-semibold">Lorem Ipsum</h3>
                   <p className="mx-auto mt-3 max-w-xs leading-snug">
                     Lorem ipsum dolor sit amet,
                     <br />
@@ -193,7 +193,7 @@ export default function Home() {
                   </svg>
                 </summary>
                 <div className="pb-6 text-center">
-                  <h3 className="text-5xl font-semibold">Lorem Ipsum</h3>
+                  <h3 className="text-3xl font-semibold">Lorem Ipsum</h3>
                   <p className="mx-auto mt-3 max-w-xs leading-snug">
                     Lorem ipsum dolor sit amet,
                     <br />
@@ -216,7 +216,7 @@ export default function Home() {
                   </svg>
                 </summary>
                 <div className="pb-6 text-center">
-                  <h3 className="text-5xl font-semibold">Lorem Ipsum</h3>
+                  <h3 className="text-3xl font-semibold">Lorem Ipsum</h3>
                   <p className="mx-auto mt-3 max-w-xs leading-snug">
                     Lorem ipsum dolor sit amet,
                     <br />
@@ -258,7 +258,7 @@ export default function Home() {
           <h1 className="text-4xl font-bold sm:text-6xl">Gnist</h1>
           <h2 className="text-2xl sm:text-3xl">Et sted for ro, natur, vand og havet</h2>
           <div className="flex flex-col text-center gap-6 mt-4">
-            <button className="flex items-center gap-2 text-white text-lg">
+            <a href="youtube.com"className="flex items-center gap-2 text-white text-lg max-w-[250px] sm:max-w-[500px]">
               Læs mere om Light up forløb
               <svg
                     className="program-chevron h-16 w-16 shrink-0 transition-transform duration-300 rotate-270"
@@ -269,8 +269,8 @@ export default function Home() {
                   >
                     <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-            </button>
-<button className="flex items-center gap-2 text-white rounded-full text-lg text-center">
+            </a>
+<a href="youtube.com" className="flex items-center gap-2 text-white rounded-full text-lg max-w-62.5 sm:max-w-125">
   Læs mere om 1:1 coaching
               <svg
                     className="program-chevron h-16 w-16 shrink-0 transition-transform duration-300 rotate-270"
@@ -281,7 +281,7 @@ export default function Home() {
                   >
                     <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-            </button>
+            </a>
           </div>
         </div>
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
