@@ -1,9 +1,9 @@
-
+import H2 from "./H2"
 
 const CtaSec = () => {
   return (
     <section className="bg-[#7F4F24] text-white p-5 md:grid md:max-h-139 md:gap-5">
-        <h2 className="text-center h-15 lg:h-20 2xl:h-27 text-[32px] lg:text-[48px] 2xl:text-[64px] border-b-2 border-white">Lorem Ipsum</h2>
+        <H2>Lorem Ipsum</H2>
         <ul className="list-decimal list-inside mt-4 text-2xl lg:text-[32px] xl:text-[38px] 2xl:text-[42px] sm:py-10">
             <li>Lorem ipsum dolor sit amet.</li>
             <li>Consectetur adipiscing elit.</li>
