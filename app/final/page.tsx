@@ -138,23 +138,26 @@ export default function Final() {
       </section>
       <section className="bg-[#656D4A] text-[#EFE6DD] p-5 md:px-6 md:py-10 lg:px-10">
         <div className="grid gap-6 md:grid-cols-2 md:items-start md:gap-8 lg:gap-12">
+          <h2 className="block text-center md:hidden text-[32px] border-b-2 border-[#EFE6DD] pb-2 w-full">
+            Light up forløb
+          </h2>
           <img
-            className="w-full h-auto md:max-w-none md:justify-self-start"
+            className="w-full h-auto md:max-w-none md:justify-self-start md:order-2"
             src="/IMG_0243 1.png"
             alt=""
           />
-          <div className="flex flex-col items-center gap-4 text-center md:items-end md:text-right md:pt-2">
-            <h2 className="text-[32px] lg:text-[48px] 2xl:text-[64px] border-b-2 border-[#EFE6DD] pb-2 w-full md:max-w-[18rem]">
+          <div className="flex flex-col items-start gap-4 text-left md:items-start md:text-left md:pt-2 md:justify-between md:order-1">
+            <h2 className="hidden md:block text-[32px] lg:text-[48px] 2xl:text-[64px] border-b-2 border-[#EFE6DD] pb-2 w-full md:max-w-88">
               Light up forløb
             </h2>
-            <p className="text-xl lg:text-[28px] xl:text-4xl 2xl:text-[40px] max-w-88">
+            <p className="text-xl lg:text-[28px] xl:text-4xl 2xl:text-[40px] max-w-none">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Reprehenderit cum natus repellendus quibusdam error laudantium
               atque corporis minus at distinctio. Illum ut possimus tempora
               commodi blanditiis.
             </p>
             <a
-              className="mt-2 block w-fit bg-[#D7CEB2] text-black px-6 py-2 rounded-md text-lg"
+              className="mt-4 block w-fit bg-[#D7CEB2] text-black px-6 py-2 rounded-md text-lg"
               href="#"
             >
               Se Light up forløb
@@ -164,23 +167,26 @@ export default function Final() {
       </section>
       <section className="bg-[#D7CEB2] text-[#333D29] p-5 md:px-6 md:py-10 lg:px-10">
         <div className="grid gap-6 md:grid-cols-2 md:items-start md:gap-8 lg:gap-12">
+          <h2 className="block text-center md:hidden text-[32px] border-b-2 border-[#EFE6DD] pb-2 w-full">
+            1:1 coaching
+          </h2>
           <img
             className="w-full h-auto md:max-w-none md:justify-self-start"
-            src="/IMG_0243 1.png"
+            src="/IMG_0203 2(1).png"
             alt=""
           />
-          <div className="flex flex-col items-center gap-4 text-center md:items-end md:text-right md:pt-2">
-            <h2 className="text-[32px] lg:text-[48px] 2xl:text-[64px] border-b-2 border-[#EFE6DD] pb-2 w-full md:max-w-[18rem]">
+          <div className="flex flex-col items-start gap-4 text-left md:items-end md:text-right md:pt-2 md:justify-between">
+            <h2 className="hidden md:block text-[32px] lg:text-[48px] 2xl:text-[64px] border-b-2 border-[#EFE6DD] pb-2 w-full md:max-w-88">
               1:1 coaching
             </h2>
-            <p className="text-xl lg:text-[28px] xl:text-4xl 2xl:text-[40px] max-w-88">
+            <p className="text-xl lg:text-[28px] xl:text-4xl 2xl:text-[40px] max-w-none">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Reprehenderit cum natus repellendus quibusdam error laudantium
               atque corporis minus at distinctio. Illum ut possimus tempora
               commodi blanditiis.
             </p>
             <a
-              className="mt-2 block w-fit bg-[#656D4A] text-[#EFE6DD] px-6 py-2 rounded-md text-lg"
+              className="mt-4 block w-fit bg-[#656D4A] text-[#EFE6DD] px-6 py-2 rounded-md text-lg"
               href="#"
             >
               Se 1:1 coaching
@@ -189,7 +195,7 @@ export default function Final() {
         </div>
       </section>
       <section className="bg-[url(/waterpillars.png)] bg-cover bg-center text-white text-shadow-lg/70 p-4 pb-10 text-xl flex flex-col gap-6">
-        <h2 className="text-center text-[32px] h-15 lg:h-20 2xl:h-27 lg:text-[48px] 2xl:text-[64px] border-b-2 border-[#EFE6DD] md:order-1">
+        <h2 className="text-center text-[32px] h-15 lg:h-20 2xl:h-27 lg:text-[48px] 2xl:text-[64px] border-b-2 border-[#EFE6DD]">
           Lorem Ipsum
         </h2>
         <p>Lorem ipsum dolor sit amet?</p>
