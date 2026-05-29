@@ -123,7 +123,7 @@ export default function Final() {
           corporis minus at distinctio. Illum ut possimus tempora commodi
           blanditiis.
         </p>
-        <button className="mt-6 block w-fit justify-self-center bg-[#D7CEB2] text-black px-6 py-2 rounded-md text-lg md:col-span-2">
+        <button className="mt-6 block w-fit justify-self-center bg-[#D7CEB2] text-black px-6 py-2 rounded-md text-lg md:col-span-2 md:order-2">
           Se Light up forløb
         </button>
       </section>
@@ -142,7 +142,7 @@ export default function Final() {
           corporis minus at distinctio. Illum ut possimus tempora commodi
           blanditiis.
         </p>
-        <button className="mt-6 block w-fit justify-self-center bg-[#656D4A] text-[#EFE6DD] px-6 py-2 rounded-md text-lg md:col-span-2">
+        <button className="mt-6 block w-fit justify-self-center bg-[#656D4A] text-[#EFE6DD] px-6 py-2 rounded-md text-lg md:col-span-2 md:order-2">
           Se 1:1 coaching
         </button>
       </section>
