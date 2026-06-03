@@ -1,6 +1,6 @@
 import H2 from "./H2"
 
-interface MainSecProps {
+export type MainSecProps = {
   bgColor?: string;
   textColor?: string;
   title?: string;

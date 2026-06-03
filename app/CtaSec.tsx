@@ -1,7 +1,7 @@
 import H2 from "./H2"
 import Button from "./Button"
 
-interface CtaSecProps {
+export type CtaSecProps = {
     title?: string;
     points?: string[];
     bgColor?: string;

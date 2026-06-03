@@ -1,11 +1,10 @@
 import H2 from "./H2"
 
-interface BgSecProps {
+export type BgSecProps = {
   bgImageUrl?: string;
   title?: string;
   text?: string;
   textColor?: string;
-
 }
 
 const BgSec = ({
@@ -24,7 +23,7 @@ const BgSec = ({
   
   }: BgSecProps) => {
   return (
-    <section className="bg-[url(https://picsum.photos/1080/1080)] bg-cover text-white p-4 pb-10 text-xl">
+    <section className={`${bgImageUrl} bg-cover text-white p-4 pb-10 text-xl`}>
         <H2>{title}</H2>
         <div
           className={`flex flex-col gap-5 pt-10 ${textColor} text-xl lg:text-[28px] xl:text-4xl 2xl:text-[40px]`}

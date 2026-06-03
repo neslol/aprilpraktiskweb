@@ -8,12 +8,14 @@ export type AccordionProps = {
 		heading: string;
 		text: string;
 	}[],
-	openAll?: boolean
+	openAll?: boolean;
+	bgColor: string;
+	textColor: string;
 }
 
-const Accordion = ({title, description, items, openAll}: AccordionProps) => {
+const Accordion = ({title, description, items, openAll, bgColor, textColor}: AccordionProps) => {
 	return (
-		<section className="bg-[#936639] text-white p-5">
+		<section className={`${bgColor} ${textColor} p-5`}>
 			<div className="mx-auto px-2 py-4">
 				<H2>{title}</H2>
 				<p className="text-center leading-tight text-xl lg:text-[28px] xl:text-4xl 2xl:text-[40px]">{description}</p>

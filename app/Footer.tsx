@@ -1,4 +1,8 @@
-const Footer = () => {
+export type FooterProps = {
+  // Define any props if needed in the future
+};
+
+const Footer = ({}: FooterProps) => {
   return (
     <footer className="bg-[#582F0E] text-white p-4 text-xl flex gap-15 sm:gap-20 justify-center lg:text-2xl">
         <p>© Lorem Ipsum 2026</p>

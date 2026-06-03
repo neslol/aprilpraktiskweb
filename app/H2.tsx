@@ -1,6 +1,7 @@
-type H2Props = {
-  classname?:string;
-} & React.LiHTMLAttributes<HTMLLIElement>
+export type H2Props = {
+  children: React.ReactNode;
+  className?: string;
+}
 
 const H2 = ( {children, className=""}: H2Props ) => {
   return (

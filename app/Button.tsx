@@ -1,6 +1,4 @@
-import React from "react";
-
-interface ButtonProps {
+export type ButtonProps = {
   bgClass?: string;
   textClass?: string;
   text?: string;
