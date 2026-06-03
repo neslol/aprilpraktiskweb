@@ -1,3 +1,4 @@
+import CtaSec from "../CtaSec";
 import Lightbox from "../Lightbox";
 
 export default function Home() {
@@ -141,6 +142,8 @@ export default function Home() {
             <button className="bg-[#F7B801] text-black px-12 py-2 rounded-md text-lg">Kontakt</button>
           </div>
         </section>
+
+        <CtaSec/>
 
         {/* Program */}
         <p>Section with a title, hr tags to separate, text about when the course starts, then 4 accordions.</p>

@@ -1,8 +1,13 @@
 import type {Config} from "@puckeditor/core";
 import Accordion, {AccordionProps} from "@/app/Accordion";
+import {Heading} from "@/app/Heading";
+import {Hero} from "@/app/Hero";
 
 type Props = {
 	Accordion: AccordionProps;
+	HeroPreview: {
+		isPastHero: boolean;
+	};
 };
 
 const config: Config<Props> = {
@@ -42,6 +47,22 @@ const config: Config<Props> = {
 				return (<Accordion title={title} description={description} items={items} openAll={openInEditor}/>);
 			},
 		},
+			HeroPreview: {
+				fields: {
+					isPastHero: {
+						type: "checkbox",
+						label: "Dark header",
+					},
+				},
+				render: ({isPastHero}) => {
+					return (
+						<>
+							<Heading isPastHero={isPastHero} />
+							<Hero />
+						</>
+					);
+				},
+			},
 	},
 };
 
