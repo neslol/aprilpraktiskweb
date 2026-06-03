@@ -1,5 +1,7 @@
 import CtaSec from "../CtaSec";
+import { Hero } from "../Hero";
 import Lightbox from "../Lightbox";
+import {Heading} from "../Heading";
 
 export default function Home() {
   return (
@@ -312,6 +314,8 @@ export default function Home() {
                 text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             />
       </div>
+      <Heading></Heading>
+      <Hero></Hero>
     </main>
   );
 }

@@ -2,6 +2,7 @@
 
 export type HeadingProps = {
   isPastHero?: boolean;
+  
 };
 
 export const Heading = ({ isPastHero = false }: HeadingProps) => {
