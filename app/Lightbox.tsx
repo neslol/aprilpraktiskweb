@@ -22,7 +22,7 @@ const Lightbox = ({ images, text }: LightboxProps) => {
   }, []);
 
   return (
-    <section className="bg-[#D7CEB2] text-black p-5 md:p-40">
+    <section className="bg-[#D7CEB2] text-black p-5 md:px-10 lg:px-20 xl:px-40">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {images.map((image, index) => (
           <img
