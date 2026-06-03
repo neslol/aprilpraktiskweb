@@ -38,8 +38,7 @@ const config: Config<Props> = {
 							type: "textarea",
 							label: "Text",
 						},
-					},
-					getItemSummary: (item, index) => item.title || `Accordion item ${(index || 0) + 1}`,
+					}
 				},
 			},
 			render: ({title, description, items = [], puck}) => {
@@ -47,22 +46,22 @@ const config: Config<Props> = {
 				return (<Accordion title={title} description={description} items={items} openAll={openInEditor}/>);
 			},
 		},
-			HeroPreview: {
-				fields: {
-					isPastHero: {
-						type: "checkbox",
-						label: "Dark header",
-					},
-				},
-				render: ({isPastHero}) => {
-					return (
-						<>
-							<Heading isPastHero={isPastHero} />
-							<Hero />
-						</>
-					);
+		HeroPreview: {
+			fields: {
+				isPastHero: {
+					type: "checkbox",
+					label: "Dark header",
 				},
 			},
+			render: ({isPastHero}) => {
+				return (
+					<>
+						<Heading isPastHero={isPastHero}/>
+						<Hero/>
+					</>
+				);
+			},
+		},
 	},
 };
 
