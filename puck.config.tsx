@@ -1,66 +1,36 @@
 import type {Config} from "@puckeditor/core";
 import Accordion, {AccordionProps} from "@/app/Accordion";
-import {Heading} from "@/app/Heading";
-import {Hero} from "@/app/Hero";
+import {Heading, HeadingProps} from "@/app/Heading";
+import {Hero, HeroProps} from "@/app/Hero";
+import BgSec, {BgSecProps} from "@/app/BgSec";
+import Button, {ButtonProps} from "@/app/Button";
+import CtaSec, {CtaSecProps} from "@/app/CtaSec";
+import Footer, {FooterProps} from "@/app/Footer";
+import Lightbox, {LightboxProps} from "@/app/Lightbox";
+import MainSec, {MainSecProps} from "@/app/MainSec";
 
 type Props = {
-	Accordion: AccordionProps;
-	HeroPreview: {
-		isPastHero: boolean;
-	};
+	TestBlock: {
+		text: string;
+	}
 };
 
 const config: Config<Props> = {
 	components: {
-		Accordion: {
+		TestBlock: {
 			fields: {
-				title: {
+				text: {
 					type: "text",
-					label: "Title",
-				},
-				description: {
-					type: "textarea",
-					label: "Description",
-				},
-				items: {
-					type: "array",
-					label: "Accordion items",
-					arrayFields: {
-						title: {
-							type: "text",
-							label: "Title",
-						},
-						heading: {
-							type: "text",
-							label: "Heading",
-						},
-						text: {
-							type: "textarea",
-							label: "Text",
-						},
-					}
-				},
+					label: "Text",
+				}
 			},
-			render: ({title, description, items = [], puck}) => {
-				const openInEditor = puck.isEditing;
-				return (<Accordion title={title} description={description} items={items} openAll={openInEditor}/>);
-			},
-		},
-		HeroPreview: {
-			fields: {
-				isPastHero: {
-					type: "checkbox",
-					label: "Dark header",
-				},
-			},
-			render: ({isPastHero}) => {
+			render: ({text = " "}) => {
 				return (
-					<>
-						<Heading isPastHero={isPastHero}/>
-						<Hero/>
-					</>
+					<div className={"bg-gray-300 w-full p-6"}>
+						{text}
+					</div>
 				);
-			},
+			}
 		},
 	},
 };

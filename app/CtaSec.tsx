@@ -20,9 +20,9 @@ const CtaSec = (
     <section className={`${bgColor} ${textColor} p-5 md:grid md:max-h-139 md:gap-5`}>
         <H2>{title}</H2>
         <ul className="list-decimal list-inside mt-4 text-2xl lg:text-[32px] xl:text-[38px] 2xl:text-[42px] sm:py-10">
-            <li>{points[0]}</li>
-            <li>{points[1]}</li>
-            <li>{points[2]}</li>
+            {points.map((point, index) => (
+                <li key={index}>{point}</li>
+            ))}
         </ul>
         <div className="flex justify-center mt-6">
             <Button text="Kontakt" bgClass="bg-[#D7CEB2]" textClass="text-white" href="#" />

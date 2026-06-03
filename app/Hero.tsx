@@ -10,16 +10,16 @@ export type HeroProps = {
 };
 
 
-export const Hero = ({ heroRef }: HeroProps) => {
+export const Hero = ({ heroRef, bgHeroUrl = "bg-[url('/hero.jpg')]", textColor = "text-white", title = "Gnist", subtitle = "Et sted for ro, natur, vand og havet" }: HeroProps) => {
     return (
       <section
         ref={heroRef}
-        className="relative h-screen overflow-hidden bg-[url('/hero.jpg')] bg-center bg-cover text-white text-xl"
+        className={`relative h-screen overflow-hidden ${bgHeroUrl} bg-center bg-cover ${textColor} text-xl`}
       >
         <div className="backdrop-brightness-50 absolute inset-0 flex flex-col items-center justify-center text-center gap-4">
-          <h1 className="text-4xl font-bold sm:text-6xl">Gnist</h1>
+          <h1 className="text-4xl font-bold sm:text-6xl">{title}</h1>
           <h2 className="text-2xl sm:text-3xl">
-            Et sted for ro, natur, vand og havet
+            {subtitle}
           </h2>
           <div className="flex flex-col text-center gap-6 mt-4">
             <a
