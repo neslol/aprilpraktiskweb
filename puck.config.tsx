@@ -4,10 +4,9 @@ import {Heading} from "@/app/Heading";
 import {Hero} from "@/app/Hero";
 
 type Props = {
+	Heading: {};
 	Accordion: AccordionProps;
-	HeroPreview: {
-		isPastHero: boolean;
-	};
+	Hero: any;
 };
 
 const config: Config<Props> = {
@@ -63,13 +62,60 @@ const config: Config<Props> = {
 				);
 			},
 		},
-		HeroPreview: {
+		Heading: {
 			render: () => {
 				return (
-					<>
-						<Heading />
-						<Hero/>
-					</>
+					<Heading />
+				);
+			},
+		},
+		Hero: {
+			fields: {
+				title: {
+					type: "text",
+					label: "Title",
+				},
+				subtitle: {
+					type: "textarea",
+					label: "Subtitle",
+				},
+				bgHeroUrl: {
+					type: "text",
+					label: "Background image URL",
+				},
+				textColor: {
+					type: "text",
+					label: "Text color class",
+				},
+				buttonTextColor: {
+					type: "text",
+					label: "Button text color class",
+				},
+				items: {
+					type: "array",
+					label: "Hero buttons",
+					arrayFields: {
+						title: {
+							type: "text",
+							label: "Button title",
+						},
+						url: {
+							type: "text",
+							label: "Link URL",
+						},
+					},
+				},
+			},
+			render: ({title, subtitle, bgHeroUrl, textColor, buttonTextColor, items = []}) => {
+				return (
+					<Hero
+						title={title}
+						subtitle={subtitle}
+						bgHeroUrl={bgHeroUrl}
+						textColor={textColor}
+						buttonTextColor={buttonTextColor}
+						items={items}
+					/>
 				);
 			},
 		},
