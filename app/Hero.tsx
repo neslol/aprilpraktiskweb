@@ -14,6 +14,7 @@ export const Hero = ({ heroRef }: HeroProps) => {
     return (
       <section
         ref={heroRef}
+        id="hero"
         className="relative h-screen overflow-hidden bg-[url('/hero.jpg')] bg-center bg-cover text-white text-xl"
       >
         <div className="backdrop-brightness-50 absolute inset-0 flex flex-col items-center justify-center text-center gap-4">

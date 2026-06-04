@@ -22,6 +22,14 @@ const config: Config<Props> = {
 					type: "textarea",
 					label: "Description",
 				},
+				bgColor: {
+					type: "text",
+					label: "Background color class",
+				},
+				textColor: {
+					type: "text",
+					label: "Text color class",
+				},
 				items: {
 					type: "array",
 					label: "Accordion items",
@@ -41,22 +49,25 @@ const config: Config<Props> = {
 					}
 				},
 			},
-			render: ({title, description, items = [], puck}) => {
+			render: ({title, description, items = [], bgColor, textColor, puck}) => {
 				const openInEditor = puck.isEditing;
-				return (<Accordion title={title} description={description} items={items} openAll={openInEditor}/>);
+				return (
+					<Accordion
+						title={title}
+						description={description}
+						items={items}
+						openAll={openInEditor}
+						bgColor={bgColor}
+						textColor={textColor}
+					/>
+				);
 			},
 		},
 		HeroPreview: {
-			fields: {
-				isPastHero: {
-					type: "checkbox",
-					label: "Dark header",
-				},
-			},
-			render: ({isPastHero}) => {
+			render: () => {
 				return (
 					<>
-						<Heading isPastHero={isPastHero}/>
+						<Heading />
 						<Hero/>
 					</>
 				);

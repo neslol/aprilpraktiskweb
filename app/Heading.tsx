@@ -1,23 +1,35 @@
 "use client";
+import { useEffect, useState } from "react";
 
-export type HeadingProps = {
-  isPastHero?: boolean;
-  
-};
+export const Heading = () => {
+  const [isPastHero, setIsPastHero] = useState(false);
 
-export const Heading = ({ isPastHero = false }: HeadingProps) => {
-    return (
-        <>
-        <header
+  useEffect(() => {
+    const updateHeaderState = () => {
+      const heroHeight = document.getElementById("hero")?.offsetHeight ?? 0;
+      setIsPastHero(window.scrollY >= heroHeight - 1);
+    };
+
+    updateHeaderState();
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
+    window.addEventListener("resize", updateHeaderState);
+
+    return () => {
+      window.removeEventListener("scroll", updateHeaderState);
+      window.removeEventListener("resize", updateHeaderState);
+    };
+  }, []);
+
+  return (
+    <>
+      <header
         className={`fixed inset-x-0 top-0 z-50 px-4 py-4 text-white transition-colors duration-300 ${
           isPastHero ? "bg-black" : "bg-transparent"
         }`}
       >
         <div className="flex flex-row items-center justify-between text-2xl">
           <p>Gnist</p>
-          <a href="#">
-            ☰
-          </a>
+          <a href="#">☰</a>
         </div>
       </header>
       <button
@@ -48,7 +60,7 @@ export const Heading = ({ isPastHero = false }: HeadingProps) => {
           />
         </svg>
       </button>
-        </>
-    )
-}
+    </>
+  );
+};
 
