@@ -10,25 +10,33 @@ import Lightbox, {LightboxProps} from "@/app/Lightbox";
 import MainSec, {MainSecProps} from "@/app/MainSec";
 
 type Props = {
-	TestBlock: {
+	Paragraph: {
 		text: string;
-	}
+	},
 };
 
 const config: Config<Props> = {
 	components: {
-		TestBlock: {
+		Row: {
+			render: () => {
+				return (
+					<div className={"bg-gray-300 w-full p-6"}>
+						<p>Row content</p>
+					</div>
+				);
+			}
+		},
+		Paragraph: {
 			fields: {
 				text: {
 					type: "text",
 					label: "Text",
+					placeholder: "Enter paragraph text",
 				}
 			},
-			render: ({text = " "}) => {
+			render: ({text}) => {
 				return (
-					<div className={"bg-gray-300 w-full p-6"}>
-						{text}
-					</div>
+					<p className={"bg-gray-300 w-full p-6"}>{text}</p>
 				);
 			}
 		},
