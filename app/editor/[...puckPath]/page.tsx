@@ -24,7 +24,7 @@ export default async function Page({
 	const {puckPath = []} = await params;
 	const path = `/${puckPath.join("/")}`;
 	const data = await getPage(path);
-	
+
 	return (<Client path={path} data={data || {}}/>);
 }
 

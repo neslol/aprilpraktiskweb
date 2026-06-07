@@ -1,5 +1,6 @@
 import type {Config} from "@puckeditor/core";
 import {DropZone} from "@puckeditor/core";
+import ImagePicker from "@/app/editor/[...puckPath]/ImagePicker";
 
 const ColorPicker = ({value, onChange}: { value: string; onChange: (val: string) => void }) => (
 	<div style={{display: "flex", alignItems: "center", gap: "8px", padding: "4px 0"}}>
@@ -101,7 +102,10 @@ const config: Config<Props> = {
 		},
 		Image: {
 			fields: {
-				src: {type: "text"},
+				src: {
+					type: "custom",
+					render: ImagePicker,
+				},
 				alt: {type: "text"},
 			},
 			defaultProps: {

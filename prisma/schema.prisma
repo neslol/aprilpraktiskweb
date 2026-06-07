@@ -18,3 +18,12 @@ model Page {
   creationDate DateTime
   updateDate   DateTime
 }
+
+model Image {
+  id        String   @id @default(uuid())
+  name      String
+  mimeType  String
+  data      Bytes
+  size      Int
+  createdAt DateTime @default(now())
+}
