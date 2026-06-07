@@ -15,8 +15,9 @@ datasource db {
 model Page {
   path         String   @id
   pageData     Json
-  creationDate DateTime
-  updateDate   DateTime
+  published    Boolean  @default(false)
+  creationDate DateTime @default(now())
+  updateDate   DateTime @updatedAt
 }
 
 model Image {

@@ -1,6 +1,6 @@
+import { ReactNode } from "react";
 import type {Config} from "@puckeditor/core";
-import {DropZone} from "@puckeditor/core";
-import ImagePicker from "@/app/editor/[...puckPath]/ImagePicker";
+import ImagePicker from "@/app/editor/[[...puckPath]]/ImagePicker";
 
 const ColorPicker = ({value, onChange}: { value: string; onChange: (val: string) => void }) => (
 	<div style={{display: "flex", alignItems: "center", gap: "8px", padding: "4px 0"}}>
@@ -29,6 +29,7 @@ type Props = {
 		gap: number;
 		horizontalArrangement: "start" | "center" | "end" | "space-between" | "space-around" | "space-evenly";
 		verticalAlignment: "top" | "middle" | "bottom";
+		content: ReactNode;
 	};
 	Text: {
 		text: string;
@@ -72,16 +73,20 @@ const config: Config<Props> = {
 						{label: "middle", value: "middle"},
 						{label: "bottom", value: "bottom"},
 					]
-				}
+				},
+				content: { type: "slot" }
 			},
 			defaultProps: {
 				gap: 6,
 				horizontalArrangement: "start",
 				verticalAlignment: "top",
+				content: [],
 			},
-			render: ({gap, horizontalArrangement, verticalAlignment}) => (
-				<DropZone zone={"content"} className={"flex"}
-				          style={{gap: `${gap}rem`, justifyContent: horizontalArrangement, alignItems: verticalAlignment}}/>
+			render: ({gap, horizontalArrangement, verticalAlignment, content}) => (
+				<div className={"flex"}
+				          style={{gap: `${gap}rem`, justifyContent: horizontalArrangement, alignItems: verticalAlignment}}>
+					{content}
+				</div>
 			),
 		},
 		Text: {

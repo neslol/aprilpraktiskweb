@@ -30,9 +30,14 @@ export default function ImageGallery() {
 		try {
 			const res = await fetch("/api/images");
 			if (!res.ok) throw new Error(`Request failed (${res.status})`);
-			const data = await res.json() as GalleryImage[];
-			setImages(data);
-			setError(null);
+			const contentType = res.headers.get("content-type");
+			if (contentType && contentType.includes("application/json")) {
+				const data = await res.json() as GalleryImage[];
+				setImages(data);
+				setError(null);
+			} else {
+				throw new Error("Invalid response from server");
+			}
 		} catch (e: unknown) {
 			setError(e instanceof Error ? e.message : "Failed to load images");
 		} finally {
@@ -202,12 +207,19 @@ export default function ImageGallery() {
 
 			<div className="grid grid-cols-2 gap-2 overflow-y-auto pr-1">
 				{images.map((img) => (
-					<button
+					<div
 						key={img.id}
-						type="button"
 						title={`${img.name} — ${(img.size / 1024).toFixed(0)} KB`}
 						onClick={() => handleClick(img)}
-						className="group relative aspect-square overflow-hidden rounded-md border border-gray-200 bg-gray-50 transition hover:border-blue-500 hover:ring-2 hover:ring-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+						onKeyDown={(e) => {
+							if (e.key === "Enter" || e.key === " ") {
+								e.preventDefault();
+								handleClick(img);
+							}
+						}}
+						tabIndex={0}
+						role="button"
+						className="group relative aspect-square cursor-pointer overflow-hidden rounded-md border border-gray-200 bg-gray-50 transition hover:border-blue-500 hover:ring-2 hover:ring-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
 					>
 						{/* eslint-disable-next-line @next/next/no-img-element */}
 						<img
@@ -221,6 +233,7 @@ export default function ImageGallery() {
 						</span>
 						<button
 							onClick={(e) => deleteImage(e, img.id)}
+							type="button"
 							className="absolute top-1 right-1 rounded-full bg-red-500 p-1 text-white opacity-0 transition hover:bg-red-600 group-hover:opacity-100"
 							title="Delete image"
 						>
@@ -228,7 +241,7 @@ export default function ImageGallery() {
 								<path d="M18 6 6 18"/><path d="m6 6 12 12"/>
 							</svg>
 						</button>
-					</button>
+					</div>
 				))}
 			</div>
 		</div>

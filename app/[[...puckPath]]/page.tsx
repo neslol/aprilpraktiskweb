@@ -1,11 +1,12 @@
 import Client from "./client";
-import {getPage} from "@/lib/get-page";
+import {getPage, PageData} from "@/lib/get-page";
 import {Metadata} from "next";
+import {notFound} from "next/navigation";
 
 export async function generateMetadata({
 	params,
 }: {
-	params: Promise<{ puckPath: string[] }>;
+	params: Promise<{ puckPath?: string[] }>;
 }): Promise<Metadata> {
 	const {puckPath = []} = await params;
 	const path = `/${puckPath.join("/")}`;
@@ -18,13 +19,17 @@ export async function generateMetadata({
 export default async function Page({
 	params,
 }: {
-	params: Promise<{ puckPath: string[] }>;
+	params: Promise<{ puckPath?: string[] }>;
 }) {
 	const {puckPath = []} = await params;
 	const path = `/${puckPath.join("/")}`;
-	const data = await getPage(path);
+	const data = await getPage(path) as PageData | null;
+
+	if (!data || !data.published) {
+		notFound();
+	}
 	
-	return (<Client path={path} data={data || {}}/>);
+	return (<Client path={path} data={data}/>);
 }
 
 export const dynamic = "force-dynamic";

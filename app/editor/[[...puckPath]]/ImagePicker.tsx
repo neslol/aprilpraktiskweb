@@ -27,8 +27,13 @@ export default function ImagePicker({ value, onChange }: ImagePickerProps) {
     try {
       const res = await fetch("/api/images");
       if (!res.ok) throw new Error("Failed to load images");
-      const data = await res.json();
-      setImages(data);
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const data = await res.json();
+        setImages(data);
+      } else {
+        throw new Error("Invalid response from server");
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error loading images");
     } finally {
@@ -216,14 +221,22 @@ export default function ImagePicker({ value, onChange }: ImagePickerProps) {
                 ) : (
                   <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
                     {images.map((img) => (
-                      <button
+                      <div
                         key={img.id}
-                        type="button"
                         onClick={() => {
                           onChange(img.url);
                           setIsOpen(false);
                         }}
-                        className={`group relative flex flex-col items-center gap-2 rounded-xl transition-all ${
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            onChange(img.url);
+                            setIsOpen(false);
+                          }
+                        }}
+                        tabIndex={0}
+                        role="button"
+                        className={`group relative flex cursor-pointer flex-col items-center gap-2 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-blue-400 ${
                           value === img.url ? "ring-2 ring-blue-500 ring-offset-4" : ""
                         }`}
                       >
@@ -241,6 +254,7 @@ export default function ImagePicker({ value, onChange }: ImagePickerProps) {
                           
                           <button
                             onClick={(e) => deleteImage(e, img.id)}
+                            type="button"
                             className="absolute top-2 right-2 rounded-full bg-red-500 p-1.5 text-white opacity-0 transition-opacity hover:bg-red-600 group-hover:opacity-100 shadow-md"
                             title="Delete image"
                           >
@@ -252,7 +266,7 @@ export default function ImagePicker({ value, onChange }: ImagePickerProps) {
                         <span className="max-w-full truncate text-[10px] font-medium text-gray-500 group-hover:text-gray-900 transition-colors">
                           {img.name}
                         </span>
-                      </button>
+                      </div>
                     ))}
                   </div>
                 )}
