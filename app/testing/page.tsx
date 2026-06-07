@@ -6,6 +6,8 @@ import {Heading} from "../Heading";
 export default function Home() {
   return (
     <main>
+            <Heading></Heading>
+      <Hero></Hero>
       The components...
       <div>
         {/* Footer */}
@@ -314,8 +316,6 @@ export default function Home() {
                 text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             />
       </div>
-      <Heading></Heading>
-      <Hero></Hero>
     </main>
   );
 }

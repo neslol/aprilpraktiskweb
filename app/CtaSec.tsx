@@ -1,32 +1,20 @@
 import H2 from "./H2"
-import Button from "./Button"
 
-export type CtaSecProps = {
-    title?: string;
-    points?: string[];
-    bgColor?: string;
-    textColor?: string;
-}
-
-const CtaSec = (
-  {
-    title = "Lorem Ipsum",
-    points = ["Lorem ipsum dolor sit amet.", "Consectetur adipiscing elit.", "Sed do eiusmod tempor incididunt."],
-    bgColor = "bg-[#7F4F24]",
-    textColor = "text-white"
-  }: CtaSecProps
-) => {
+const CtaSec = () => {
   return (
-    <section className={`${bgColor} ${textColor} p-5 md:grid md:max-h-139 md:gap-5`}>
-        <H2>{title}</H2>
-        <ul className="list-decimal list-inside mt-4 text-2xl lg:text-[32px] xl:text-[38px] 2xl:text-[42px] sm:py-10">
-            {points.map((point, index) => (
-                <li key={index}>{point}</li>
-            ))}
+    <section className="bg-[#656D4A] text-white p-5 md:p-0 md:px-10 lg:px-20 xl:px-40 md:grid md:grid-cols-2 md:max-h-150 md:gap-5">
+      <H2 className="md:order-1">Lorem Ipsum</H2>
+      <img className="m-auto py-5 md:row-span-3 w-full md:max-w-160 h-auto md:m-0  md:justify-self-end md:order-1" src="images/IMG_0243 1.png" alt="" />
+      <div className="order-2">
+        <ul className="list-decimal list-inside mt-4 text-2xl lg:text-[28px] xl:text-[32px] 2xl:text-[36px] sm:py-10">
+          <li>Lorem ipsum dolor sit amet.</li>
+          <li>Consectetur adipiscing elit.</li>
+          <li>Sed do eiusmod tempor incididunt.</li>
         </ul>
         <div className="flex justify-center mt-6">
-            <Button text="Kontakt" bgClass="bg-[#D7CEB2]" textClass="text-white" href="#" />
+          <button className="bg-[#414833] px-12 py-2 rounded-md text-[16px] lg:text-xl">Kontakt</button>
         </div>
+      </div>
     </section>
   )
 }
