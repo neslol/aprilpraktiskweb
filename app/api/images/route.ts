@@ -9,11 +9,6 @@ export type GalleryImage = {
 	mimeType: string;
 };
 
-/**
- * GET /api/images
- *
- * Lists images stored in the database.
- */
 export async function GET() {
 	try {
 		const images = await prisma.image.findMany({
@@ -41,11 +36,6 @@ export async function GET() {
 	}
 }
 
-/**
- * POST /api/images
- *
- * Uploads a new image to the database.
- */
 export async function POST(request: NextRequest) {
 	try {
 		const formData = await request.formData();

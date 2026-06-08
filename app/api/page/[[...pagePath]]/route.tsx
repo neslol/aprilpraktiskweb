@@ -62,7 +62,7 @@ export async function PATCH(
 ) {
 	const { pagePath } = await params;
 	const path = pagePath ? `/${pagePath.join("/")}` : "/";
-	const { newPath, published } = await request.json();
+	const { newPath, published, isRoot } = await request.json();
 
 	try {
 		if (newPath) {
@@ -84,6 +84,7 @@ export async function PATCH(
 						path: newPath,
 						pageData: oldPage.pageData as any,
 						published: published !== undefined ? published : oldPage.published,
+						isRoot: oldPage.isRoot,
 						creationDate: oldPage.creationDate,
 						updateDate: new Date(),
 					}
@@ -97,6 +98,20 @@ export async function PATCH(
 			await prisma.page.update({
 				where: { path },
 				data: { published, updateDate: new Date() }
+			});
+			return NextResponse.json({ success: true });
+		} else if (isRoot !== undefined) {
+			if (isRoot) {
+				// Unset existing root page
+				await prisma.page.updateMany({
+					where: { isRoot: true },
+					data: { isRoot: false }
+				});
+			}
+
+			await prisma.page.update({
+				where: { path },
+				data: { isRoot, updateDate: new Date() }
 			});
 			return NextResponse.json({ success: true });
 		}

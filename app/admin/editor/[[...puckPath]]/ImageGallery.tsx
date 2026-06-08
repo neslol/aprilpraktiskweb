@@ -7,14 +7,6 @@ import type {GalleryImage} from "@/app/api/images/route";
 // Root content zone id used by Puck (rootAreaId:rootZone).
 const ROOT_ZONE = "root:default-zone";
 
-/**
- * Image gallery panel for the editor's left sidebar.
- *
- * Loads images from GET /api/images and lets the user either:
- *  - click an image to insert a new Image block at the end of the page, or
- *  - if an Image block is currently selected, update its source in place.
- *  - drag and drop images to upload them to the database.
- */
 export default function ImageGallery() {
 	const {dispatch, selectedItem, appState} = usePuck();
 	const itemSelector = appState.ui.itemSelector;

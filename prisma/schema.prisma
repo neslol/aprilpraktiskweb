@@ -16,6 +16,7 @@ model Page {
   path         String   @id
   pageData     Json
   published    Boolean  @default(false)
+  isRoot       Boolean  @default(false)
   creationDate DateTime @default(now())
   updateDate   DateTime @updatedAt
 }

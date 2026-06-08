@@ -1,7 +1,7 @@
 import Client from "./client";
-import {getPage, PageData} from "@/lib/get-page";
+import {getPage, getRootPage, PageData} from "@/lib/get-page";
 import {Metadata} from "next";
-import {notFound} from "next/navigation";
+import {notFound, redirect} from "next/navigation";
 
 export async function generateMetadata({
 	params,
@@ -23,9 +23,15 @@ export default async function Page({
 }) {
 	const {puckPath = []} = await params;
 	const path = `/${puckPath.join("/")}`;
-	const data = await getPage(path) as PageData | null;
+	let data = await getPage(path) as PageData | null;
 
 	if (!data || !data.published) {
+		if (path === "/") {
+			const rootPage = await getRootPage();
+			if (rootPage && rootPage.published && rootPage.path && rootPage.path !== "/") {
+				redirect(rootPage.path);
+			}
+		}
 		notFound();
 	}
 	

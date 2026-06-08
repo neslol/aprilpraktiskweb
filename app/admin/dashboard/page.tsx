@@ -6,6 +6,7 @@ import Link from "next/link";
 interface Page {
   path: string;
   published: boolean;
+  isRoot: boolean;
   creationDate: string;
   updateDate: string;
 }
@@ -96,6 +97,21 @@ export default function Dashboard() {
       await fetchPages();
     } catch (err) {
       alert("Failed to update status");
+      console.error(err);
+    }
+  };
+
+  const toggleRoot = async (page: Page) => {
+    try {
+      const res = await fetch(`/api/page${page.path}`, {
+        method: "PATCH",
+        body: JSON.stringify({ isRoot: !page.isRoot }),
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!res.ok) throw new Error("Failed to toggle root status");
+      await fetchPages();
+    } catch (err) {
+      alert("Failed to update root status");
       console.error(err);
     }
   };
@@ -191,7 +207,7 @@ export default function Dashboard() {
                 filteredPages.map((page) => (
                   <tr key={page.path} className="group hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4">
-                      <div className="flex flex-col">
+                      <div className="flex flex-col gap-2">
                         <Link 
                           href={page.path} 
                           target="_blank" 
@@ -199,7 +215,12 @@ export default function Dashboard() {
                         >
                           {page.path}
                         </Link>
-                        <span className="text-xs text-gray-400">Root path</span>
+                        {page.isRoot && (
+                          <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded w-fit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            Root Page
+                          </span>
+                        )}
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -227,6 +248,17 @@ export default function Dashboard() {
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"/></svg>
                         </Link>
+                        <button 
+                          onClick={() => toggleRoot(page)}
+                          className={`rounded-lg p-2 transition-all ${
+                            page.isRoot 
+                              ? "text-purple-600 bg-purple-50 hover:bg-purple-100" 
+                              : "text-gray-400 hover:bg-gray-100 hover:text-gray-900"
+                          }`}
+                          title={page.isRoot ? "Unmark as Root" : "Mark as Root"}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </button>
                         <button 
                           onClick={() => {
                             setIsRenaming(page.path);
