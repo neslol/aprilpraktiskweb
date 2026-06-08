@@ -1,12 +1,18 @@
 import type {Config} from "@puckeditor/core";
 import Accordion, {AccordionProps} from "@/app/Accordion";
 import {Heading} from "@/app/Heading";
-import {Hero} from "@/app/Hero";
+import {Hero, HeroProps} from "@/app/Hero";
+import MainSec, { MainSecProps } from "@/app/MainSec";
+import CtaSec, { CtaSecProps } from "@/app/CtaSec";
+import BgSec, { BgSecProps } from "@/app/BgSec";
 
 type Props = {
 	Heading: {};
 	Accordion: AccordionProps;
-	Hero: any;
+	Hero: HeroProps;
+	MainSec: MainSecProps;
+	CtaSec: CtaSecProps;
+	BgSec: BgSecProps;
 };
 
 const config: Config<Props> = {
@@ -115,6 +121,127 @@ const config: Config<Props> = {
 						textColor={textColor}
 						buttonTextColor={buttonTextColor}
 						items={items}
+					/>
+				);
+			},
+		},
+		MainSec: {
+			fields: {
+				title: {
+					type: "text",
+					label: "Title",
+				},
+				text: {
+					type: "textarea",
+					label: "Text",
+				},
+				imageUrl: {
+					type: "text",
+					label: "Image URL",
+				},
+				imageAlt: {
+					type: "text",
+					label: "Image Alt Text",
+				},
+				bgColor: {
+					type: "text",
+					label: "Background color class",
+				},
+				textColor: {
+					type: "text",
+					label: "Text color class",
+				},
+			},
+			render: ({title, text, imageUrl, imageAlt, bgColor, textColor}) => {
+				return (
+					<MainSec
+						title={title}
+						text={text}
+						imageUrl={imageUrl}
+						imageAlt={imageAlt}
+						bgColor={bgColor}
+						textColor={textColor}
+					/>
+				);
+			},
+		},
+		CtaSec: {
+			fields: {
+				title: {
+					type: "text",
+					label: "Title",
+				},
+				points: {
+					type: "array",
+					label: "Points",
+					arrayFields: {
+						point: {
+							type: "text",
+							label: "Point",
+						},
+					}
+				},
+				buttonText: {
+					type: "text",
+					label: "Button Text",
+				},
+				buttonColor: {
+					type: "text",
+					label: "Button Color Class",
+				},
+				bgColor: {
+					type: "text",
+					label: "Background Color Class",
+				},
+				textColor: {
+					type: "text",
+					label: "Text Color Class",
+				},
+				imageUrl: {
+					type: "text",
+					label: "Image URL",
+				},
+			},
+			render: ({title, points, buttonText, buttonColor, bgColor, textColor, imageUrl}) => {
+				return (
+					<CtaSec
+						title={title}
+						points={points}
+						buttonText={buttonText}
+						buttonColor={buttonColor}
+						bgColor={bgColor}
+						textColor={textColor}
+						imageUrl={imageUrl}
+					/>
+				);
+			},
+		},
+		BgSec: {
+			fields: {
+				bgImageUrl: {
+					type: "text",
+					label: "Image URL",
+				},
+				title: {
+					type: "text",
+					label: "Title",
+				},
+				text: {
+					type: "textarea",
+					label: "Text",
+				},
+				textColor: {
+					type: "text",
+					label: "Text color class",
+				},
+			},
+			render: ({bgImageUrl,title, text, textColor}) => {
+				return (
+					<BgSec
+						bgImageUrl={bgImageUrl}
+						title={title}
+						text={text}	
+						textColor={textColor}
 					/>
 				);
 			},
