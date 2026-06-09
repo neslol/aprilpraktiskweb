@@ -45,7 +45,7 @@ type Props = {
 		src: string;
 		alt: string;
 	};
-	Button: {
+	ButtonTest: {
 		text: string;
 		link: string;
 		variant: "primary" | "secondary" | "accent" | "custom";
@@ -132,7 +132,7 @@ const config: Config<Props> = {
 				<img src={src} alt={alt} className="block w-full h-auto rounded-lg shadow-md"/>
 			),
 		},
-		Button: {
+		ButtonTest: {
 			fields: {
 				text: {type: "text"},
 				link: {type: "text"},
