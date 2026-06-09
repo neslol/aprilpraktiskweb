@@ -5,6 +5,7 @@ import {Hero, HeroProps} from "@/app/Hero";
 import MainSec, { MainSecProps } from "@/app/MainSec";
 import CtaSec, { CtaSecProps } from "@/app/CtaSec";
 import BgSec, { BgSecProps } from "@/app/BgSec";
+import Button, { ButtonProps } from "@/app/Button";
 
 type Props = {
 	Heading: {};
@@ -13,6 +14,7 @@ type Props = {
 	MainSec: MainSecProps;
 	CtaSec: CtaSecProps;
 	BgSec: BgSecProps;
+	Button: ButtonProps;
 };
 
 const config: Config<Props> = {
@@ -242,6 +244,36 @@ const config: Config<Props> = {
 						title={title}
 						text={text}	
 						textColor={textColor}
+					/>
+				);
+			},
+		},
+		Button: {
+			fields: {
+				bgClass: {
+					type: "text",
+					label: "Background color class",
+				},
+				textClass: {
+					type: "text",
+					label: "Text color class",
+				},
+				text: {
+					type: "text",
+					label: "Button text",
+				},
+				href: {
+					type: "text",
+					label: "Link URL",
+				},
+			},
+			render: ({bgClass, textClass, text, href}) => {
+				return (
+					<Button
+						bgClass={bgClass}
+						textClass={textClass}
+						text={text}
+						href={href}
 					/>
 				);
 			},

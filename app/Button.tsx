@@ -6,12 +6,10 @@ export type ButtonProps = {
 }
 
 const Button = ({
-
-    // midlertidigt info fra f.eks. API
-  bgClass = "bg-[#D7CEB2]",
-  textClass = "text-black",
-  text = "Se Light up forløb",
-  href = "#",
+  bgClass,
+  textClass,
+  text,
+  href,
 }: ButtonProps) => {
   return (
     <a
