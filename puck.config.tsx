@@ -6,6 +6,7 @@ import {Hero, HeroProps} from "@/app/Hero";
 import MainSec, { MainSecProps } from "@/app/MainSec";
 import CtaSec, { CtaSecProps } from "@/app/CtaSec";
 import BgSec, { BgSecProps } from "@/app/BgSec";
+import Button, { ButtonProps } from "@/app/Button";
 
 const ColorPicker = ({value, onChange}: { value: string; onChange: (val: string) => void }) => (
 	<div style={{display: "flex", alignItems: "center", gap: "8px", padding: "4px 0"}}>
@@ -58,6 +59,7 @@ type Props = {
 	MainSec: MainSecProps;
 	CtaSec: CtaSecProps;
 	BgSec: BgSecProps;
+	Button: ButtonProps;
 };
 
 const config: Config<Props> = {
@@ -408,6 +410,36 @@ const config: Config<Props> = {
 						title={title}
 						text={text}	
 						textColor={textColor}
+					/>
+				);
+			},
+		},
+		Button: {
+			fields: {
+				bgClass: {
+					type: "text",
+					label: "Background color class",
+				},
+				textClass: {
+					type: "text",
+					label: "Text color class",
+				},
+				text: {
+					type: "text",
+					label: "Button text",
+				},
+				href: {
+					type: "text",
+					label: "Link URL",
+				},
+			},
+			render: ({bgClass, textClass, text, href}) => {
+				return (
+					<Button
+						bgClass={bgClass}
+						textClass={textClass}
+						text={text}
+						href={href}
 					/>
 				);
 			},
