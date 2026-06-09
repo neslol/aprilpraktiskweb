@@ -1,11 +1,38 @@
-import {Data} from "@puckeditor/core";
-import fs from "fs";
+import type { Data } from "@puckeditor/core";
+import { prisma } from "@/lib/prisme";
 
-// Replace with call to your database
-export const getPage = (path: string) => {
-	const allData: Record<string, Data> | null = fs.existsSync("database.json")
-		? JSON.parse(fs.readFileSync("database.json", "utf-8"))
-		: null;
+export interface PageData extends Data {
+	published?: boolean;
+	isRoot?: boolean;
+	path?: string;
+}
 
-	return allData ? allData[path] : null;
+export const getPage = async (path: string) => {
+	const page = await prisma.page.findUnique({
+		where: { path },
+	});
+
+	if (!page) return null;
+
+	return {
+		...(page.pageData as Data),
+		published: page.published,
+		isRoot: page.isRoot,
+		path: page.path,
+	};
+};
+
+export const getRootPage = async () => {
+	const page = await prisma.page.findFirst({
+		where: { isRoot: true },
+	});
+
+	if (!page) return null;
+
+	return {
+		...(page.pageData as Data),
+		published: page.published,
+		isRoot: page.isRoot,
+		path: page.path,
+	};
 };
