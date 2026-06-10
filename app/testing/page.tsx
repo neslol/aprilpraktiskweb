@@ -147,8 +147,6 @@ export default function Home() {
           </div>
         </section>
 
-        <CtaSec/>
-
         {/* Program */}
         <p>Section with a title, hr tags to separate, text about when the course starts, then 4 accordions.</p>
         <section className="bg-[#986B3D] text-[#F7EBD8] p-4 text-xl">
