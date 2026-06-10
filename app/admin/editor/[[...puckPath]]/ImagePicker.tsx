@@ -4,12 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 import type { GalleryImage } from "@/app/api/images/route";
 
-export interface ImagePickerProps {
-  value: string;
-  onChange: (value: string) => void;
-}
-
-export default function ImagePicker({ value, onChange }: ImagePickerProps) {
+export default function ImagePicker({ value, onChange }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(false);
@@ -138,7 +133,7 @@ export default function ImagePicker({ value, onChange }: ImagePickerProps) {
       )}
 
       {mounted && isOpen && createPortal(
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" style={{ zIndex: 9999 }}>
           <div className="relative flex h-[85vh] w-full max-w-5xl flex-col rounded-2xl bg-white shadow-2xl">
             {/* Header */}
             <div className="flex items-center justify-between border-b border-gray-100 px-8 py-5">

@@ -3,6 +3,12 @@ import { useEffect, useState } from "react";
 
 export const Heading = () => {
   const [isPastHero, setIsPastHero] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const menuItems = [
+    { label: "Light Up Forløb", href: "#light-up" },
+    { label: "1:1 Coaching", href: "#coaching" },
+  ];
 
   useEffect(() => {
     const updateHeaderState = () => {
@@ -29,8 +35,32 @@ export const Heading = () => {
       >
         <div className="flex flex-row items-center justify-between text-2xl">
           <p>Gnist</p>
-          <a href="#">☰</a>
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((current) => !current)}
+            aria-expanded={isMenuOpen}
+            aria-label="Open menu"
+            className="rounded-full px-2 py-1 text-3xl leading-none transition-transform duration-200 hover:scale-105 active:scale-95"
+          >
+            ☰
+          </button>
         </div>
+        {isMenuOpen ? (
+          <div className="mt-4 overflow-hidden rounded-3xl border border-white/15 bg-black/90 shadow-2xl backdrop-blur-md">
+            <nav aria-label="Primary" className="flex flex-col p-2">
+              {menuItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="rounded-2xl px-4 py-4 text-lg font-medium transition-colors duration-200 hover:bg-white/10"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        ) : null}
       </header>
       <button
         type="button"
@@ -63,4 +93,3 @@ export const Heading = () => {
     </>
   );
 };
-

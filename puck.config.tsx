@@ -8,7 +8,13 @@ import CtaSec, { CtaSecProps } from "@/app/CtaSec";
 import BgSec, { BgSecProps } from "@/app/BgSec";
 import Button, { ButtonProps } from "@/app/Button";
 
-const ColorPicker = ({value, onChange}: { value: string; onChange: (val: string) => void }) => (
+const ColorPicker = ({
+	value,
+	onChange,
+}: {
+	value?: string;
+	onChange: (...args: any[]) => void;
+}) => (
 	<div style={{display: "flex", alignItems: "center", gap: "8px", padding: "4px 0"}}>
 		<input
 			type="color"
@@ -196,12 +202,12 @@ const config: Config<Props> = {
 					label: "Description",
 				},
 				bgColor: {
-					type: "text",
-					label: "Background color class",
+					type: "custom",
+					render: ColorPicker,
 				},
 				textColor: {
-					type: "text",
-					label: "Text color class",
+					type: "custom",
+					render: ColorPicker,
 				},
 				items: {
 					type: "array",
@@ -254,16 +260,16 @@ const config: Config<Props> = {
 					label: "Subtitle",
 				},
 				bgHeroUrl: {
-					type: "text",
-					label: "Background image URL",
+					type: "custom",
+					render: ImagePicker,
 				},
 				textColor: {
-					type: "text",
-					label: "Text color class",
+					type: "custom",
+					render: ColorPicker,
 				},
 				buttonTextColor: {
-					type: "text",
-					label: "Button text color class",
+					type: "custom",
+					render: ColorPicker,
 				},
 				items: {
 					type: "array",
@@ -304,20 +310,20 @@ const config: Config<Props> = {
 					label: "Text",
 				},
 				imageUrl: {
-					type: "text",
-					label: "Image URL",
+					type: "custom",
+					render: ImagePicker,
 				},
 				imageAlt: {
 					type: "text",
 					label: "Image Alt Text",
 				},
 				bgColor: {
-					type: "text",
-					label: "Background color class",
+					type: "custom",
+					render: ColorPicker,
 				},
 				textColor: {
-					type: "text",
-					label: "Text color class",
+					type: "custom",
+					render: ColorPicker,
 				},
 			},
 			render: ({title, text, imageUrl, imageAlt, bgColor, textColor}) => {
@@ -354,23 +360,27 @@ const config: Config<Props> = {
 					label: "Button Text",
 				},
 				buttonColor: {
-					type: "text",
-					label: "Button Color Class",
+					type: "custom",
+					render: ColorPicker,
 				},
 				bgColor: {
-					type: "text",
-					label: "Background Color Class",
+					type: "custom",
+					render: ColorPicker,
 				},
 				textColor: {
-					type: "text",
-					label: "Text Color Class",
+					type: "custom",
+					render: ColorPicker,
 				},
 				imageUrl: {
+					type: "custom",
+					render: ImagePicker,
+				},
+				imageAlt: {
 					type: "text",
-					label: "Image URL",
+					label: "Image Alt Text",
 				},
 			},
-			render: ({title, points, buttonText, buttonColor, bgColor, textColor, imageUrl}) => {
+			render: ({title, points, buttonText, buttonColor, bgColor, textColor, imageUrl, imageAlt}) => {
 				return (
 					<CtaSec
 						title={title}
@@ -380,6 +390,7 @@ const config: Config<Props> = {
 						bgColor={bgColor}
 						textColor={textColor}
 						imageUrl={imageUrl}
+						imageAlt={imageAlt}
 					/>
 				);
 			},
@@ -387,8 +398,8 @@ const config: Config<Props> = {
 		BgSec: {
 			fields: {
 				bgImageUrl: {
-					type: "text",
-					label: "Image URL",
+					type: "custom",
+					render: ImagePicker,
 				},
 				title: {
 					type: "text",
@@ -399,8 +410,8 @@ const config: Config<Props> = {
 					label: "Text",
 				},
 				textColor: {
-					type: "text",
-					label: "Text color class",
+					type: "custom",
+					render: ColorPicker,
 				},
 			},
 			render: ({bgImageUrl,title, text, textColor}) => {
@@ -416,13 +427,13 @@ const config: Config<Props> = {
 		},
 		Button: {
 			fields: {
-				bgClass: {
-					type: "text",
-					label: "Background color class",
+				bgColor: {
+					type: "custom",
+					render: ColorPicker,
 				},
-				textClass: {
-					type: "text",
-					label: "Text color class",
+				textColor: {
+					type: "custom",
+					render: ColorPicker,
 				},
 				text: {
 					type: "text",
@@ -433,11 +444,11 @@ const config: Config<Props> = {
 					label: "Link URL",
 				},
 			},
-			render: ({bgClass, textClass, text, href}) => {
+				render: ({bgColor, textColor, text, href}) => {
 				return (
 					<Button
-						bgClass={bgClass}
-						textClass={textClass}
+							bgColor={bgColor}
+							textColor={textColor}
 						text={text}
 						href={href}
 					/>

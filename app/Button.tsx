@@ -1,19 +1,20 @@
 export type ButtonProps = {
-  bgClass?: string;
-  textClass?: string;
+  bgColor?: string;
+  textColor?: string;
   text?: string;
   href?: string;
 }
 
 const Button = ({
-  bgClass,
-  textClass,
+  bgColor,
+  textColor,
   text,
   href,
 }: ButtonProps) => {
   return (
     <a
-      className={`mt-4 block w-fit ${bgClass} ${textClass} px-6 py-2 rounded-md text-lg`}
+      className="mt-4 block w-fit px-6 py-2 rounded-md text-lg"
+      style={{backgroundColor: bgColor, color: textColor}}
       href={href}
     >
       {text}

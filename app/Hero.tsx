@@ -21,8 +21,8 @@ export const Hero = ({ heroRef, bgHeroUrl, textColor, buttonTextColor, title, su
       <section
         ref={heroRef}
         id="hero"
-        style={{ backgroundImage: `url(${bgHeroUrl})` }}
-        className={`relative h-screen overflow-hidden bg-center bg-cover ${textColor} text-xl`}
+        style={{ backgroundImage: `url(${bgHeroUrl})`, color: textColor }}
+        className="relative h-screen overflow-hidden bg-center bg-cover text-xl"
       >
         <div className="backdrop-brightness-50 absolute inset-0 flex flex-col items-center justify-center text-center gap-4">
           <h1 className="text-4xl font-bold sm:text-6xl">{title}</h1>
@@ -35,7 +35,8 @@ export const Hero = ({ heroRef, bgHeroUrl, textColor, buttonTextColor, title, su
               <a
                 key={`${item.title ?? "hero-link"}-${index}`}
                 href={item.url ?? "#"}
-                className={`flex items-center gap-2 ${buttonTextColor} text-lg max-w-62.5 sm:max-w-125`}
+                style={{ color: buttonTextColor }}
+                className={`flex items-center gap-2 text-lg max-w-62.5 sm:max-w-125`}
               >
                 {item.title}
                 <svg
