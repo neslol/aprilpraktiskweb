@@ -7,6 +7,8 @@ import MainSec, { MainSecProps } from "@/app/MainSec";
 import CtaSec, { CtaSecProps } from "@/app/CtaSec";
 import BgSec, { BgSecProps } from "@/app/BgSec";
 import Button, { ButtonProps } from "@/app/Button";
+import Lightbox, { LightboxProps } from "@/app/Lightbox";
+import Footer, { FooterProps } from "@/app/Footer";
 
 const ColorPicker = ({
 	value,
@@ -66,6 +68,8 @@ type Props = {
 	CtaSec: CtaSecProps;
 	BgSec: BgSecProps;
 	Button: ButtonProps;
+	Lightbox: LightboxProps;
+	Footer: FooterProps;
 };
 
 const config: Config<Props> = {
@@ -453,6 +457,65 @@ const config: Config<Props> = {
 						href={href}
 					/>
 				);
+			},
+		},
+		Lightbox: {
+			fields: {
+				images: {
+					type: "array",
+					label: "Images",
+					arrayFields: {
+						src: {
+							type: "custom",
+							render: ImagePicker,
+						},
+						alt: {
+							type: "text",
+							label: "Alt text",
+						},
+					}
+				},
+				text: {
+					type: "text",
+					label: "Text",
+				},
+				bgColor: {
+					type: "custom",
+					render: ColorPicker,
+				},
+				textColor: {
+					type: "custom",
+					render: ColorPicker,
+				},
+			},
+			render: ({images = [], text, bgColor, textColor}) => {
+				return (
+					<Lightbox images={images} text={text} bgColor={bgColor} textColor={textColor} />
+				);
+			},
+		},
+		Footer: {
+			fields: {
+				text: {
+					type: "text",
+					label: "Footer text",
+				},
+				bgColor: {
+					type: "custom",
+					render: ColorPicker,
+				},
+				textColor: {
+					type: "custom",
+					render: ColorPicker,
+				},
+			},
+			render: ({text, bgColor, textColor}) => (
+				<Footer bgColor={bgColor} textColor={textColor} text={text} />
+			),
+			defaultProps: {
+				text: "© 2024 My Company. All rights reserved.",
+				bgColor: "#333333",
+				textColor: "#ffffff",
 			},
 		},
 	},

@@ -304,12 +304,12 @@ export default function Home() {
         </div>
       </section> 
       {/* Lightbox */}
-      <Lightbox
+      <Lightbox bgColor="#D7CEB2" textColor="black"
                 images={[
-                    "https://picsum.photos/200/300",
-                    "https://picsum.photos/201/301",
-                    "https://picsum.photos/202/302",
-                    "https://picsum.photos/203/303",
+              { src: "https://picsum.photos/200/300", alt: "Sample image 1" },
+              { src: "https://picsum.photos/201/301", alt: "Sample image 2" },
+              { src: "https://picsum.photos/202/302", alt: "Sample image 3" },
+              { src: "https://picsum.photos/203/303", alt: "Sample image 4" },
                 ]}
                 text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             />

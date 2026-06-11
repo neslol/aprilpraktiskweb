@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 
 export type LightboxProps = {
-  images: string[];
+  images: { src: string; alt: string }[];
   text: string;
+  bgColor: string;
+  textColor: string;
 };
 
-const Lightbox = ({ images, text }: LightboxProps) => {
+const Lightbox = ({ images, text, bgColor, textColor }: LightboxProps) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -22,15 +24,16 @@ const Lightbox = ({ images, text }: LightboxProps) => {
   }, []);
 
   return (
-    <section className="bg-[#D7CEB2] text-black p-5 md:px-10 lg:px-20 xl:px-40">
+    <section style={{ backgroundColor: bgColor, color: textColor }}
+    className="p-5 md:px-10 lg:px-20 xl:px-40">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {images.map((image, index) => (
           <img
             key={index}
-            src={image}
-            alt={`Placeholder ${index + 1}`}
+            src={image.src}
+            alt={image.alt}
             className="cursor-pointer w-full h-auto"
-            onClick={() => setSelectedImage(image)}
+            onClick={() => setSelectedImage(image.src)}
           />
         ))}
       </div>
