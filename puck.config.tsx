@@ -15,7 +15,7 @@ const ColorPicker = ({
 	onChange,
 }: {
 	value?: string;
-	onChange: (...args: any[]) => void;
+	onChange: (value: string) => void;
 }) => (
 	<div style={{display: "flex", alignItems: "center", gap: "8px", padding: "4px 0"}}>
 		<input
@@ -36,6 +36,23 @@ const ColorPicker = ({
       {value || "#ffffff"}
     </span>
 	</div>
+);
+
+const BooleanToggle = ({
+	value,
+	onChange,
+}: {
+	value?: boolean;
+	onChange: (value: boolean) => void;
+}) => (
+	<label style={{display: "flex", alignItems: "center", gap: "8px", padding: "4px 0", cursor: "pointer"}}>
+		<input
+			type="checkbox"
+			checked={Boolean(value)}
+			onChange={(e) => onChange(e.target.checked)}
+		/>
+		<span style={{fontSize: "14px", color: "#666"}}>{value ? "Reversed layout" : "Text left, image right"}</span>
+	</label>
 );
 
 type Props = {
@@ -61,7 +78,7 @@ type Props = {
 		textColor: string;
 	};
 	
-	Heading: {};
+	Heading: Record<string, never>;
 	Accordion: AccordionProps;
 	Hero: HeroProps;
 	MainSec: MainSecProps;
@@ -271,10 +288,6 @@ const config: Config<Props> = {
 					type: "custom",
 					render: ColorPicker,
 				},
-				buttonTextColor: {
-					type: "custom",
-					render: ColorPicker,
-				},
 				items: {
 					type: "array",
 					label: "Hero buttons",
@@ -283,6 +296,10 @@ const config: Config<Props> = {
 							type: "text",
 							label: "Button title",
 						},
+						buttonTextColor: {
+					type: "custom",
+					render: ColorPicker,
+				},
 						url: {
 							type: "text",
 							label: "Link URL",
@@ -290,14 +307,13 @@ const config: Config<Props> = {
 					},
 				},
 			},
-			render: ({title, subtitle, bgHeroUrl, textColor, buttonTextColor, items = []}) => {
+			render: ({title, subtitle, bgHeroUrl, textColor, items = []}) => {
 				return (
 					<Hero
 						title={title}
 						subtitle={subtitle}
 						bgHeroUrl={bgHeroUrl}
 						textColor={textColor}
-						buttonTextColor={buttonTextColor}
 						items={items}
 					/>
 				);
@@ -329,8 +345,12 @@ const config: Config<Props> = {
 					type: "custom",
 					render: ColorPicker,
 				},
+				reverseLayout: {
+					type: "custom",
+					render: BooleanToggle,
+				},
 			},
-			render: ({title, text, imageUrl, imageAlt, bgColor, textColor}) => {
+			render: ({title, text, imageUrl, imageAlt, bgColor, textColor, reverseLayout}) => {
 				return (
 					<MainSec
 						title={title}
@@ -339,6 +359,7 @@ const config: Config<Props> = {
 						imageAlt={imageAlt}
 						bgColor={bgColor}
 						textColor={textColor}
+						reverseLayout={reverseLayout}
 					/>
 				);
 			},

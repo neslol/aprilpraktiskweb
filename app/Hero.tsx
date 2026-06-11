@@ -3,20 +3,20 @@ import type { RefObject } from "react";
 export type HeroButton = {
   title?: string;
   url?: string;
+  buttonTextColor?: string;
 };
 
 export type HeroProps = {
   heroRef?: RefObject<HTMLElement | null>;
   bgHeroUrl?: string;
   textColor?: string;
-  buttonTextColor?: string;
   title?: string;
   subtitle?: string;
   items?: HeroButton[];
 };
 
 
-export const Hero = ({ heroRef, bgHeroUrl, textColor, buttonTextColor, title, subtitle, items = [] }: HeroProps) => {
+export const Hero = ({ heroRef, bgHeroUrl, textColor, title, subtitle, items = [] }: HeroProps) => {
     return (
       <section
         ref={heroRef}
@@ -35,7 +35,7 @@ export const Hero = ({ heroRef, bgHeroUrl, textColor, buttonTextColor, title, su
               <a
                 key={`${item.title ?? "hero-link"}-${index}`}
                 href={item.url ?? "#"}
-                style={{ color: buttonTextColor }}
+                style={{ color: item.buttonTextColor }}
                 className={`flex items-center gap-2 text-lg max-w-62.5 sm:max-w-125`}
               >
                 {item.title}
