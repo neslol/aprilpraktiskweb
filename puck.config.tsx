@@ -1,7 +1,7 @@
 import {Config, Slot} from "@puckeditor/core";
 import ImagePicker from "@/app/admin/editor/[[...puckPath]]/ImagePicker";
 import Accordion, {AccordionProps} from "@/app/Accordion";
-import {Heading, HeadingProps} from "@/app/Heading";
+import Heading, {HeadingProps} from "@/app/Heading";
 import {Hero, HeroProps} from "@/app/Hero";
 import MainSec, { MainSecProps } from "@/app/MainSec";
 import CtaSec, { CtaSecProps } from "@/app/CtaSec";
@@ -309,7 +309,22 @@ const config: Config<Props> = {
 			},
 			render: () => {
 				return (
-					
+					<Heading
+						title="My Website"
+						logo="https://upload.wikimedia.org/wikipedia/commons/a/ab/Android_O_Preview_Logo.png"
+						logoAlt="Logo"
+						backgroundColor="#000000"
+						textColor="#ffffff"
+						menuItems={[
+							{ label: "Home", href: "#" },
+							{ label: "About", href: "#" },
+							{ label: "Services", href: "#" },
+							{ label: "Contact", href: "#" },
+						]}
+						scrollToTopButton={true}
+						scrollButtonColor="#2563eb"
+						scrollButtonArrowColor="#ffffff"
+					/>
 				);
 			},
 		},
