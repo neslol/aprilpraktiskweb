@@ -25,7 +25,7 @@ export const Hero = ({ heroRef, bgHeroUrl, textColor, title, subtitle, items = [
         className="relative h-screen overflow-hidden bg-center bg-cover text-xl"
       >
         <div className="backdrop-brightness-50 absolute inset-0 flex flex-col items-center justify-center text-center gap-4">
-          <h1 className="text-4xl font-bold sm:text-6xl">{title}</h1>
+          <h1 className="text-6xl font-bold">{title}</h1>
           <h2 className="text-2xl sm:text-3xl">
             {subtitle}
           </h2>
