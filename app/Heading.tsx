@@ -1,14 +1,24 @@
 "use client";
 import { useEffect, useState } from "react";
 
-export const Heading = () => {
+export type HeadingProps = {
+  title: string;
+  logo: string;
+  logoAlt: string;
+  backgroundColor: string;
+  textColor: string;
+  menuItems: {
+    label: string;
+    href: string;
+  }[];
+  scrollToTopButton?: boolean;
+  scrollButtonColor?: string;
+  scrollButtonArrowColor?: string;
+};
+
+export const Heading = ({ title, logo, logoAlt, backgroundColor, textColor, menuItems, scrollToTopButton, scrollButtonColor, scrollButtonArrowColor }: HeadingProps) => {
   const [isPastHero, setIsPastHero] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const menuItems = [
-    { label: "Light Up Forløb", href: "#light-up" },
-    { label: "1:1 Coaching", href: "#coaching" },
-  ];
 
   useEffect(() => {
     const updateHeaderState = () => {
@@ -29,14 +39,16 @@ export const Heading = () => {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50  p-5 md:px-10 lg:px-20 xl:px-40 text-white transition-colors duration-300 ${
-          isPastHero ? "bg-black" : "bg-transparent"
-        }`}
+        className="fixed inset-x-0 top-0 z-50 p-5 md:px-10 lg:px-20 xl:px-40 transition-colors duration-300"
+        style={{
+          backgroundColor: isPastHero ? "#000000" : backgroundColor,
+          color: textColor,
+        }}
       >
         <div className="flex flex-row items-center justify-between text-2xl">
           <div className="flex gap-5">
-            <img className="w-full h-10" src="IMG_0203 2.png" alt="" />
-            <p>Gnist</p>
+            <img className="w-full h-10" src={logo} alt={logoAlt} />
+            <p>{title}</p>
           </div>
           <button
             type="button"
