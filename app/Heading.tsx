@@ -29,18 +29,21 @@ export const Heading = () => {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 px-4 py-4 text-white transition-colors duration-300 ${
+        className={`fixed inset-x-0 top-0 z-50  p-5 md:px-10 lg:px-20 xl:px-40 text-white transition-colors duration-300 ${
           isPastHero ? "bg-black" : "bg-transparent"
         }`}
       >
         <div className="flex flex-row items-center justify-between text-2xl">
-          <p>Gnist</p>
+          <div className="flex gap-5">
+            <img className="w-full h-10" src="IMG_0203 2.png" alt="" />
+            <p>Gnist</p>
+          </div>
           <button
             type="button"
             onClick={() => setIsMenuOpen((current) => !current)}
             aria-expanded={isMenuOpen}
             aria-label="Open menu"
-            className="rounded-full px-2 py-1 text-3xl leading-none transition-transform duration-200 hover:scale-105 active:scale-95"
+            className="rounded-full text-3xl leading-none transition-transform duration-200 hover:scale-105 active:scale-95"
           >
             ☰
           </button>
