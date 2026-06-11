@@ -1,7 +1,7 @@
 import {Config, Slot} from "@puckeditor/core";
 import ImagePicker from "@/app/admin/editor/[[...puckPath]]/ImagePicker";
 import Accordion, {AccordionProps} from "@/app/Accordion";
-import {Heading} from "@/app/Heading";
+import Heading, {HeadingProps} from "@/app/Heading";
 import {Hero, HeroProps} from "@/app/Hero";
 import MainSec, { MainSecProps } from "@/app/MainSec";
 import CtaSec, { CtaSecProps } from "@/app/CtaSec";
@@ -78,7 +78,7 @@ type Props = {
 		textColor: string;
 	};
 	
-	Heading: Record<string, never>;
+	Heading: HeadingProps;
 	Accordion: AccordionProps;
 	Hero: HeroProps;
 	MainSec: MainSecProps;
@@ -249,24 +249,82 @@ const config: Config<Props> = {
 					}
 				},
 			},
-			render: ({title, description, items = [], bgColor, textColor, puck}) => {
-				const openInEditor = puck.isEditing;
-				return (
+			render: ({title, description, items = [], bgColor, textColor}) => (
 					<Accordion
 						title={title}
 						description={description}
 						items={items}
-						openAll={openInEditor}
 						bgColor={bgColor}
 						textColor={textColor}
 					/>
-				);
+				),
+				defaultProps: {
+				title: "Frequently Asked Questions",
+				description: "Here are some of our FAQs. If you have any other quesitons you'd like answered please feel free to email us.",
+				bgColor: "#f9f9f9",
+				textColor: "#111111",
+				items: [
+					{ title: "What is your return policy?", heading: "Return Policy", text: "You can return any item within 30 days of purchase for a full refund." },
+					{ title: "Do you offer international shipping?", heading: "International Shipping", text: "Yes, we ship to most countries worldwide. Shipping costs will apply, and will be added at checkout." },
+					{ title: "How can I track my order?", heading: "Order Tracking", text: "Once your order has shipped, we will send you an email with the tracking information." },
+				],
 			},
 		},
 		Heading: {
+			fields: {
+				title: {
+					type: "text",
+					label: "Title",
+				},
+				logo: {
+					type: "custom",
+					render: ImagePicker,
+				},
+				logoAlt: {
+					type: "text",
+					label: "Logo Alt Text",
+				},
+				backgroundColor: {
+					type: "custom",
+					render: ColorPicker,
+				},
+				textColor: {
+					type: "custom",
+					render: ColorPicker,
+				},
+				menuItems: {
+					type: "array",
+					label: "Menu items",
+					arrayFields: {
+						label: {
+							type: "text",
+							label: "Label",
+						},
+						href: {
+							type: "text",
+							label: "Link URL",
+						}
+					}
+				}
+			},
 			render: () => {
 				return (
-					<Heading />
+					<Heading
+						title="My Website"
+						logo="https://upload.wikimedia.org/wikipedia/commons/a/ab/Android_O_Preview_Logo.png"
+						logoAlt="Logo"
+						backgroundColor="#000000"
+						textColor="#ffffff"
+						menuItems={[
+							{ label: "Home", href: "#" },
+							{ label: "About", href: "#" },
+							{ label: "Services", href: "#" },
+							{ label: "Contact", href: "#" },
+						]}
+						scrollToTopButton={true}
+						scrollButtonColor="#2563eb"
+						scrollButtonArrowColor="#ffffff"
+					/>
 				);
 			},
 		},
@@ -307,8 +365,7 @@ const config: Config<Props> = {
 					},
 				},
 			},
-			render: ({title, subtitle, bgHeroUrl, textColor, items = []}) => {
-				return (
+			render: ({title, subtitle, bgHeroUrl, textColor, items = []}) => (
 					<Hero
 						title={title}
 						subtitle={subtitle}
@@ -316,7 +373,16 @@ const config: Config<Props> = {
 						textColor={textColor}
 						items={items}
 					/>
-				);
+				),
+				defaultProps: {
+				title: "Welcome to Our Website",
+				subtitle: "Discover our amazing products and services. We offer the best solutions for your needs.",
+				bgHeroUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+				textColor: "#ffffff",
+				items: [
+					{ title: "Get Started", buttonTextColor: "#ffffff", url: "#" },
+					{ title: "Learn More", buttonTextColor: "#ffffff", url: "#" },
+				],
 			},
 		},
 		MainSec: {
@@ -350,8 +416,7 @@ const config: Config<Props> = {
 					render: BooleanToggle,
 				},
 			},
-			render: ({title, text, imageUrl, imageAlt, bgColor, textColor, reverseLayout}) => {
-				return (
+			render: ({title, text, imageUrl, imageAlt, bgColor, textColor, reverseLayout}) => (
 					<MainSec
 						title={title}
 						text={text}
@@ -361,7 +426,15 @@ const config: Config<Props> = {
 						textColor={textColor}
 						reverseLayout={reverseLayout}
 					/>
-				);
+				),
+				defaultProps: {
+				title: "Main Section",
+				text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+				imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+				imageAlt: "Placeholder image",
+				bgColor: "#000fff",
+				textColor: "#111111",
+				reverseLayout: false,
 			},
 		},
 		CtaSec: {
@@ -405,8 +478,7 @@ const config: Config<Props> = {
 					label: "Image Alt Text",
 				},
 			},
-			render: ({title, points, buttonText, buttonColor, bgColor, textColor, imageUrl, imageAlt}) => {
-				return (
+			render: ({title, points, buttonText, buttonColor, bgColor, textColor, imageUrl, imageAlt}) => (
 					<CtaSec
 						title={title}
 						points={points}
@@ -417,7 +489,16 @@ const config: Config<Props> = {
 						imageUrl={imageUrl}
 						imageAlt={imageAlt}
 					/>
-				);
+				),
+				defaultProps: {
+				title: "Call to Action",
+				points: [{point: "Benefit 1"}, {point: "Benefit 2"}, {point: "Benefit 3"}],
+				buttonText: "Get Started",
+				buttonColor: "#2563eb",
+				bgColor: "#52b76c",
+				textColor: "#111111",
+				imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+				imageAlt: "Placeholder image",
 			},
 		},
 		BgSec: {
@@ -439,15 +520,19 @@ const config: Config<Props> = {
 					render: ColorPicker,
 				},
 			},
-			render: ({bgImageUrl,title, text, textColor}) => {
-				return (
+			render: ({bgImageUrl,title, text, textColor}) => (
 					<BgSec
 						bgImageUrl={bgImageUrl}
 						title={title}
 						text={text}	
 						textColor={textColor}
 					/>
-				);
+				),
+			defaultProps: {
+				bgImageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+				title: "Background Section",
+				text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+				textColor: "#ffffff",
 			},
 		},
 		Button: {
@@ -469,15 +554,19 @@ const config: Config<Props> = {
 					label: "Link URL",
 				},
 			},
-				render: ({bgColor, textColor, text, href}) => {
-				return (
+				render: ({bgColor, textColor, text, href}) => (
 					<Button
 							bgColor={bgColor}
 							textColor={textColor}
 						text={text}
 						href={href}
 					/>
-				);
+				),
+				defaultProps: {
+				bgColor: "#D7CEB2",
+				textColor: "black",
+				text: "Læs mere",
+				href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
 			},
 		},
 		Lightbox: {
@@ -509,10 +598,19 @@ const config: Config<Props> = {
 					render: ColorPicker,
 				},
 			},
-			render: ({images = [], text, bgColor, textColor}) => {
-				return (
+			render: ({images = [], text, bgColor, textColor}) => (
 					<Lightbox images={images} text={text} bgColor={bgColor} textColor={textColor} />
-				);
+			),
+			defaultProps: {
+				bgColor: "#D7CEB2",
+				textColor: "black",
+				images: [
+					{ src: "https://picsum.photos/200/300", alt: "Sample image 1" },
+					{ src: "https://picsum.photos/201/301", alt: "Sample image 2" },
+					{ src: "https://picsum.photos/202/302", alt: "Sample image 3" },
+					{ src: "https://picsum.photos/203/303", alt: "Sample image 4" },
+				],
+				text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			},
 		},
 		Footer: {
