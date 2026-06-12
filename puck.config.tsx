@@ -349,19 +349,10 @@ const config: Config<Props> = {
 					},
 				},
 				render: ({scrollButtonColor, scrollButtonArrowColor}) => (
-					<button
-						style={{
-							background: scrollButtonColor || "#2563eb",
-							color: scrollButtonArrowColor || "#ffffff",
-							border: "none",
-							borderRadius: "9999px",
-							padding: "8px 12px",
-							cursor: "pointer",
-						}}
-						type="button"
-					>
-						↑
-					</button>
+					<ScrollButton 
+					scrollButtonColor={scrollButtonColor} 
+					scrollButtonArrowColor={scrollButtonArrowColor} 
+					/>
 				),
 				defaultProps: {
 					scrollButtonColor:"#2563eb",

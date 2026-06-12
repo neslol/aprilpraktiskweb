@@ -3,7 +3,8 @@ export type ScrollButtonProps = {
   scrollButtonArrowColor: string;
 };
 
-export const ScrollButton = ({scrollButtonColor, scrollButtonArrowColor }: ScrollButtonProps) => {
+const ScrollButton = ({scrollButtonColor, scrollButtonArrowColor }: ScrollButtonProps) => {
+    return (
     <button
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -33,5 +34,7 @@ export const ScrollButton = ({scrollButtonColor, scrollButtonArrowColor }: Scrol
         />
       </svg>
     </button>
+)
 }
 
+export default ScrollButton;

@@ -6,7 +6,6 @@ import Heading from "../Heading";
 export default function Home() {
   return (
     <main>
-            <Heading></Heading>
       <Hero></Hero>
       The components...
       <div>
