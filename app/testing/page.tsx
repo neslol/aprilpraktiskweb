@@ -2,11 +2,13 @@ import CtaSec from "../CtaSec";
 import Hero from "../Hero";
 import Lightbox from "../Lightbox";
 import Heading from "../Heading";
+import Contact from "../Contact";
 
 export default function Home() {
   return (
     <main>
       <Hero></Hero>
+      <Contact></Contact>
       The components...
       <div>
         {/* Footer */}
