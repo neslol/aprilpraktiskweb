@@ -16,7 +16,7 @@ export type HeroProps = {
 };
 
 
-export const Hero = ({ heroRef, bgHeroUrl, textColor, title, subtitle, items = [] }: HeroProps) => {
+const Hero = ({ heroRef, bgHeroUrl, textColor, title, subtitle, items = [] }: HeroProps) => {
     return (
       <section
         ref={heroRef}
@@ -78,3 +78,5 @@ export const Hero = ({ heroRef, bgHeroUrl, textColor, title, subtitle, items = [
       </section>
     )
 }
+
+export default Hero;

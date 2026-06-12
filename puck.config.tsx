@@ -2,13 +2,14 @@ import {Config, Slot} from "@puckeditor/core";
 import ImagePicker from "@/app/admin/editor/[[...puckPath]]/ImagePicker";
 import Accordion, {AccordionProps} from "@/app/Accordion";
 import Heading, {HeadingProps} from "@/app/Heading";
-import {Hero, HeroProps} from "@/app/Hero";
+import Hero, {HeroProps} from "@/app/Hero";
 import MainSec, { MainSecProps } from "@/app/MainSec";
 import CtaSec, { CtaSecProps } from "@/app/CtaSec";
 import BgSec, { BgSecProps } from "@/app/BgSec";
 import Button, { ButtonProps } from "@/app/Button";
 import Lightbox, { LightboxProps } from "@/app/Lightbox";
 import Footer, { FooterProps } from "@/app/Footer";
+import ScrollButton, {ScrollButtonProps} from "./app/ScrollButton";
 
 const ColorPicker = ({
 	value,
@@ -41,9 +42,13 @@ const ColorPicker = ({
 const BooleanToggle = ({
 	value,
 	onChange,
+	onLabel = "On",
+	offLabel = "Off",
 }: {
 	value?: boolean;
 	onChange: (value: boolean) => void;
+	onLabel?: string;
+	offLabel?: string;
 }) => (
 	<label style={{display: "flex", alignItems: "center", gap: "8px", padding: "4px 0", cursor: "pointer"}}>
 		<input
@@ -51,7 +56,7 @@ const BooleanToggle = ({
 			checked={Boolean(value)}
 			onChange={(e) => onChange(e.target.checked)}
 		/>
-		<span style={{fontSize: "14px", color: "#666"}}>{value ? "Reversed layout" : "Text left, image right"}</span>
+		<span style={{fontSize: "14px", color: "#666"}}>{value ? onLabel : offLabel}</span>
 	</label>
 );
 
@@ -79,6 +84,7 @@ type Props = {
 	};
 	
 	Heading: HeadingProps;
+	ScrollButton: ScrollButtonProps;
 	Accordion: AccordionProps;
 	Hero: HeroProps;
 	MainSec: MainSecProps;
@@ -305,29 +311,63 @@ const config: Config<Props> = {
 							label: "Link URL",
 						}
 					}
-				}
+				},
 			},
-			render: () => {
-				return (
+			render: ({title, logo, logoAlt, backgroundColor, textColor, menuItems}) => (
 					<Heading
-						title="My Website"
-						logo="https://upload.wikimedia.org/wikipedia/commons/a/ab/Android_O_Preview_Logo.png"
-						logoAlt="Logo"
-						backgroundColor="#000000"
-						textColor="#ffffff"
-						menuItems={[
+						title={title}
+						logo={logo}
+						logoAlt={logoAlt}
+						backgroundColor={backgroundColor}
+						textColor={textColor}
+						menuItems={menuItems}
+					/>
+				),
+				defaultProps: {
+						title:"My Website",
+						logo:"https://upload.wikimedia.org/wikipedia/commons/a/ab/Android_O_Preview_Logo.png",
+						logoAlt:"Logo",
+						backgroundColor:"#000000",
+						textColor:"#ffffff",
+						menuItems: [
 							{ label: "Home", href: "#" },
 							{ label: "About", href: "#" },
 							{ label: "Services", href: "#" },
 							{ label: "Contact", href: "#" },
-						]}
-						scrollToTopButton={true}
-						scrollButtonColor="#2563eb"
-						scrollButtonArrowColor="#ffffff"
-					/>
-				);
+						],
+				}
 			},
-		},
+			ScrollButton: {
+				fields: {
+					scrollButtonColor: {
+						type: "custom",
+						render: ColorPicker,
+					},
+					scrollButtonArrowColor: {
+						type: "custom",
+						render: ColorPicker,
+					},
+				},
+				render: ({scrollButtonColor, scrollButtonArrowColor}) => (
+					<button
+						style={{
+							background: scrollButtonColor || "#2563eb",
+							color: scrollButtonArrowColor || "#ffffff",
+							border: "none",
+							borderRadius: "9999px",
+							padding: "8px 12px",
+							cursor: "pointer",
+						}}
+						type="button"
+					>
+						↑
+					</button>
+				),
+				defaultProps: {
+					scrollButtonColor:"#2563eb",
+					scrollButtonArrowColor:"#ffffff"
+				}
+			},
 		Hero: {
 			fields: {
 				title: {

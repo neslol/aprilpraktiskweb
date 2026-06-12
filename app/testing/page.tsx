@@ -1,7 +1,7 @@
 import CtaSec from "../CtaSec";
-import { Hero } from "../Hero";
+import Hero from "../Hero";
 import Lightbox from "../Lightbox";
-import {Heading} from "../Heading";
+import Heading from "../Heading";
 
 export default function Home() {
   return (
