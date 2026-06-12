@@ -30,6 +30,17 @@ model Image {
   createdAt DateTime @default(now())
 }
 
+model ContactSubmission {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+
+  @@map("contact_submission")
+}
+
 model User {
   id            String    @id
   name          String
