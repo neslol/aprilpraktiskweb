@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 
 export type LightboxProps = {
   images: { src: string; alt: string }[];
+  points?: Array<string | { point?: string }>;
   text: string;
   bgColor: string;
   textColor: string;
 };
 
-const Lightbox = ({ images, text, bgColor, textColor }: LightboxProps) => {
+const Lightbox = ({ images, points, text, bgColor, textColor }: LightboxProps) => {
+  const pointList = (points ?? [])
+    .map((point) => (typeof point === "string" ? point : point?.point))
+    .filter((point): point is string => Boolean(point));
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -37,6 +41,11 @@ const Lightbox = ({ images, text, bgColor, textColor }: LightboxProps) => {
           />
         ))}
       </div>
+            <ul className="list-decimal list-inside mt-4 text-2xl lg:text-[28px] xl:text-[32px] 2xl:text-[36px] sm:py-10">
+          {pointList.map((point, index) => (
+            <li key={index}>{point}</li>
+          ))}
+        </ul>
       <p className="mt-5 text-xl">
         {text}
       </p>

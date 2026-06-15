@@ -446,8 +446,28 @@ const config: Config<Props> = {
 					type: "custom",
 					render: BooleanToggle,
 				},
+				buttonToggle: {
+					type: "custom",
+					render: BooleanToggle,
+				},
+				buttonText: {
+					type: "text",
+					label: "Button Text",
+				},
+				buttonBgColor: {
+					type: "custom",
+					render: ColorPicker,
+				},
+				buttonTextColor: {
+					type: "custom",
+					render: ColorPicker,
+				},
+				buttonHref: {
+					type: "text",
+					label: "Button Link URL",
+				},
 			},
-			render: ({title, text, imageUrl, imageAlt, bgColor, textColor, reverseLayout}) => (
+			render: ({title, text, imageUrl, imageAlt, bgColor, textColor, reverseLayout, buttonToggle, buttonText, buttonBgColor, buttonTextColor, buttonHref}) => (
 					<MainSec
 						title={title}
 						text={text}
@@ -456,6 +476,11 @@ const config: Config<Props> = {
 						bgColor={bgColor}
 						textColor={textColor}
 						reverseLayout={reverseLayout}
+						buttonToggle={buttonToggle}
+						buttonText={buttonText}
+						buttonBgColor={buttonBgColor}
+						buttonTextColor={buttonTextColor}
+						buttonHref={buttonHref}
 					/>
 				),
 				defaultProps: {
@@ -466,6 +491,11 @@ const config: Config<Props> = {
 				bgColor: "#000fff",
 				textColor: "#111111",
 				reverseLayout: false,
+				buttonToggle: false,
+				buttonText: "Learn More",
+				buttonBgColor: "#2563eb",
+				buttonTextColor: "#ffffff",
+				buttonHref: "#",
 			},
 		},
 		CtaSec: {
@@ -616,6 +646,16 @@ const config: Config<Props> = {
 						},
 					}
 				},
+				points: {
+					type: "array",
+					label: "Points",
+					arrayFields: {
+						point: {
+							type: "text",
+							label: "Point",
+						},
+					}
+				},
 				text: {
 					type: "text",
 					label: "Text",
@@ -629,8 +669,8 @@ const config: Config<Props> = {
 					render: ColorPicker,
 				},
 			},
-			render: ({images = [], text, bgColor, textColor}) => (
-					<Lightbox images={images} text={text} bgColor={bgColor} textColor={textColor} />
+			render: ({images = [], points, text, bgColor, textColor}) => (
+					<Lightbox images={images} points={points} text={text} bgColor={bgColor} textColor={textColor} />
 			),
 			defaultProps: {
 				bgColor: "#D7CEB2",
@@ -640,6 +680,11 @@ const config: Config<Props> = {
 					{ src: "https://picsum.photos/201/301", alt: "Sample image 2" },
 					{ src: "https://picsum.photos/202/302", alt: "Sample image 3" },
 					{ src: "https://picsum.photos/203/303", alt: "Sample image 4" },
+				],
+				points: [
+					"Point 1",
+					"Point 2",
+					"Point 3"
 				],
 				text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			},
