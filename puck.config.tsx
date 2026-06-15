@@ -646,6 +646,10 @@ const config: Config<Props> = {
 						},
 					}
 				},
+				pointsHeader: {
+					type: "text",
+					label: "Points header",
+				},
 				points: {
 					type: "array",
 					label: "Points",
@@ -669,8 +673,8 @@ const config: Config<Props> = {
 					render: ColorPicker,
 				},
 			},
-			render: ({images = [], points, text, bgColor, textColor}) => (
-					<Lightbox images={images} points={points} text={text} bgColor={bgColor} textColor={textColor} />
+			render: ({images = [], pointsHeader, points, text, bgColor, textColor}) => (
+					<Lightbox images={images} pointsHeader={pointsHeader} points={points} text={text} bgColor={bgColor} textColor={textColor} />
 			),
 			defaultProps: {
 				bgColor: "#D7CEB2",
@@ -681,6 +685,7 @@ const config: Config<Props> = {
 					{ src: "https://picsum.photos/202/302", alt: "Sample image 3" },
 					{ src: "https://picsum.photos/203/303", alt: "Sample image 4" },
 				],
+				pointsHeader: "Key Points",
 				points: [
 					"Point 1",
 					"Point 2",
