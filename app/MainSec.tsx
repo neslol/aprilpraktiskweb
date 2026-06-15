@@ -13,6 +13,7 @@ export type MainSecProps = {
 const MainSec = ({bgColor, textColor, title, text, imageUrl, imageAlt, reverseLayout}: MainSecProps) => {
   const textColumnOrder = reverseLayout ? "md:order-2" : "md:order-1";
   const imageColumnOrder = reverseLayout ? "md:order-1" : "md:order-2";
+  const imageAlignment = reverseLayout ? "md:justify-self-start" : "md:justify-self-end";
   const textAlignment = reverseLayout ? "md:text-right" : "md:text-left";
 
   return (
@@ -20,8 +21,9 @@ const MainSec = ({bgColor, textColor, title, text, imageUrl, imageAlt, reverseLa
       <div className={`flex flex-col justify-center ${textColumnOrder} ${textAlignment} `}>
         <H2>{title}</H2>
         <p className="text-xl md:px-5 md:pb-5">{text}</p>
+
       </div>
-      <img className={`m-auto py-5 w-full md:max-w-160 h-auto md:m-0 md:justify-self-end ${imageColumnOrder}`} src={imageUrl} alt={imageAlt} />
+      <img className={`m-auto py-5 w-full md:max-w-160 h-auto md:m-0 ${imageColumnOrder} ${imageAlignment}`} src={imageUrl} alt={imageAlt} />
     </section>
   )
 }

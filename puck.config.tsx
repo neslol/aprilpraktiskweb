@@ -668,29 +668,29 @@ const config: Config<Props> = {
 				textColor: "#ffffff",
 			},
 		},
-		Contact: {
-			fields: {
-				title: {
-					type: "text",
-					label: "Title",
-				},
-				bgColor: {
-					type: "custom",
-					render: ColorPicker,
-				},
-				textColor: {
-					type: "custom",
-					render: ColorPicker,
-				},
-			},
-			render: ({title, bgColor, textColor}) => (
-			),
-			defaultProps: {
-				title: "Kontakt",
-				bgColor: "rgba(0, 0, 0, 0.25)",
-				textColor: "#ffffff",
-			},
-		}
+		// Contact: {
+		// 	fields: {
+		// 		title: {
+		// 			type: "text",
+		// 			label: "Title",
+		// 		},
+		// 		bgColor: {
+		// 			type: "custom",
+		// 			render: ColorPicker,
+		// 		},
+		// 		textColor: {
+		// 			type: "custom",
+		// 			render: ColorPicker,
+		// 		},
+		// 	},
+		// 	render: ({title, bgColor, textColor}) => (
+		// 	),
+		// 	defaultProps: {
+		// 		title: "Kontakt",
+		// 		bgColor: "rgba(0, 0, 0, 0.25)",
+		// 		textColor: "#ffffff",
+		// 	},
+		// }
 	},
 };
 
