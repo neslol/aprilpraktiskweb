@@ -112,7 +112,7 @@ const Contact = () => {
             className="rounded-full border border-white/15 px-3 py-1 text-sm text-white/80 transition hover:bg-white/10 hover:text-white"
             aria-label="Luk kontaktformular"
           >
-            Luk
+            X
           </button>
         </div>
 
