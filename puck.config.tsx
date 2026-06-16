@@ -10,6 +10,7 @@ import Button, { ButtonProps } from "@/app/Button";
 import Lightbox, { LightboxProps } from "@/app/Lightbox";
 import Footer, { FooterProps } from "@/app/Footer";
 import ScrollButton, {ScrollButtonProps} from "./app/ScrollButton";
+import LaunchHero, { LaunchHeroProps } from "./app/LaunchHero";
 
 const ColorPicker = ({
 	value,
@@ -28,14 +29,12 @@ const ColorPicker = ({
 				borderRadius: "4px",
 				width: "32px",
 				height: "32px",
-				padding: "2px",
+				padding: "3px",
 				cursor: "pointer",
 				background: "none"
 			}}
 		/>
-		<span style={{fontSize: "14px", fontFamily: "monospace", color: "#666"}}>
-      {value || "#ffffff"}
-    </span>
+		<input type="text" value={value || "#ffffff"} onChange={(e) => onChange(e.target.value)} style={{flex: 1, border: "1px solid #ccc", borderRadius: "4px", padding: "3px"}} />
 	</div>
 );
 
@@ -66,6 +65,7 @@ type Props = {
 		horizontalArrangement: "start" | "center" | "end" | "space-between" | "space-around" | "space-evenly";
 		verticalAlignment: "top" | "middle" | "bottom";
 		content: Slot;
+
 	};
 	Text: {
 		text: string;
@@ -75,13 +75,13 @@ type Props = {
 		src: string;
 		alt: string;
 	};
-	ButtonTest: {
-		text: string;
-		link: string;
-		variant: "primary" | "secondary" | "accent" | "custom";
-		backgroundColor: string;
-		textColor: string;
-	};
+	// ButtonTest: {
+	// 	text: string;
+	// 	link: string;
+	// 	variant: "primary" | "secondary" | "accent" | "custom";
+	// 	backgroundColor: string;
+	// 	textColor: string;
+	// };
 	
 	Heading: HeadingProps;
 	ScrollButton: ScrollButtonProps;
@@ -93,6 +93,7 @@ type Props = {
 	Button: ButtonProps;
 	Lightbox: LightboxProps;
 	Footer: FooterProps;
+	LaunchHero: LaunchHeroProps;
 };
 
 const config: Config<Props> = {
@@ -165,58 +166,58 @@ const config: Config<Props> = {
 				<img src={src} alt={alt} className="block w-full h-auto rounded-lg shadow-md"/>
 			),
 		},
-		ButtonTest: {
-			fields: {
-				text: {type: "text"},
-				link: {type: "text"},
-				variant: {
-					type: "select",
-					options: [
-						{label: "Primary", value: "primary"},
-						{label: "Secondary", value: "secondary"},
-						{label: "Accent", value: "accent"},
-						{label: "Custom", value: "custom"},
-					],
-				},
-				backgroundColor: {
-					type: "custom",
-					render: ColorPicker,
-				},
-				textColor: {
-					type: "custom",
-					render: ColorPicker,
-				},
-			},
-			defaultProps: {
-				text: "Learn More",
-				link: "#",
-				variant: "primary",
-				backgroundColor: "#2563eb",
-				textColor: "#ffffff",
-			},
-			render: ({text, link, variant, backgroundColor, textColor}) => {
-				const variantClasses = {
-					primary: "bg-blue-600 text-white hover:bg-blue-700 shadow-lg",
-					secondary: "bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50",
-					accent: "bg-[#D7CEB2] text-black hover:bg-[#c5ba9a]",
-					custom: "",
-				};
+		// ButtonTest: {
+		// 	fields: {
+		// 		text: {type: "text"},
+		// 		link: {type: "text"},
+		// 		variant: {
+		// 			type: "select",
+		// 			options: [
+		// 				{label: "Primary", value: "primary"},
+		// 				{label: "Secondary", value: "secondary"},
+		// 				{label: "Accent", value: "accent"},
+		// 				{label: "Custom", value: "custom"},
+		// 			],
+		// 		},
+		// 		backgroundColor: {
+		// 			type: "custom",
+		// 			render: ColorPicker,
+		// 		},
+		// 		textColor: {
+		// 			type: "custom",
+		// 			render: ColorPicker,
+		// 		},
+		// 	},
+		// 	defaultProps: {
+		// 		text: "Learn More",
+		// 		link: "#",
+		// 		variant: "primary",
+		// 		backgroundColor: "#2563eb",
+		// 		textColor: "#ffffff",
+		// 	},
+		// 	render: ({text, link, variant, backgroundColor, textColor}) => {
+		// 		const variantClasses = {
+		// 			primary: "bg-blue-600 text-white hover:bg-blue-700 shadow-lg",
+		// 			secondary: "bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50",
+		// 			accent: "bg-[#D7CEB2] text-black hover:bg-[#c5ba9a]",
+		// 			custom: "",
+		// 		};
 
-				const style = variant === "custom" ? {backgroundColor, color: textColor} : {};
+		// 		const style = variant === "custom" ? {backgroundColor, color: textColor} : {};
 
-				return (
-					<div className="my-4">
-						<a
-							href={link}
-							style={style}
-							className={`inline-block px-8 py-3 rounded-full font-medium transition-all transform hover:scale-105 ${variantClasses[variant]}`}
-						>
-							{text}
-						</a>
-					</div>
-				);
-			},
-		},
+		// 		return (
+		// 			<div className="my-4">
+		// 				<a
+		// 					href={link}
+		// 					style={style}
+		// 					className={`inline-block px-8 py-3 rounded-full font-medium transition-all transform hover:scale-105 ${variantClasses[variant]}`}
+		// 				>
+		// 					{text}
+		// 				</a>
+		// 			</div>
+		// 		);
+		// 	},
+		// },
 
 		Accordion: {
 			fields: {
@@ -385,7 +386,7 @@ const config: Config<Props> = {
 							type: "text",
 							label: "Button title",
 						},
-						buttonTextColor: {
+					buttonTextColor: {
 					type: "custom",
 					render: ColorPicker,
 				},
@@ -416,6 +417,54 @@ const config: Config<Props> = {
 				],
 			},
 		},
+
+		LaunchHero: {
+			fields: {
+				bgHeroUrl: {
+					type: "custom",
+					render: ImagePicker,
+				},
+				textColor: {
+					type: "custom",
+					render: ColorPicker,
+				},
+				items: {
+					type: "array",
+					label: "Hero items",
+					arrayFields: {
+						title: {
+							type: "text",
+							label: "Item title",
+						},
+						buttonTextColor: {
+							type: "custom",
+							render: ColorPicker,
+						},
+						url: {
+							type: "text",
+							label: "Link URL",
+						},
+					},
+				},
+			},
+			render: ({bgHeroUrl, textColor, items = []}) => (
+				<LaunchHero
+					bgHeroUrl={bgHeroUrl}
+					textColor={textColor}
+					items={items}
+				/>
+			),
+			defaultProps: {
+				bgHeroUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+				textColor: "#ffffff",
+				items: [
+					{ title: "Launch Product", buttonTextColor: "#ffffff", url: "#" },
+				],
+			},
+		},
+
+
+							
 		MainSec: {
 			fields: {
 				title: {
@@ -694,30 +743,138 @@ const config: Config<Props> = {
 				text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			},
 		},
-		Footer: {
-			fields: {
-				text: {
-					type: "text",
-					label: "Footer text",
-				},
-				bgColor: {
-					type: "custom",
-					render: ColorPicker,
-				},
-				textColor: {
-					type: "custom",
-					render: ColorPicker,
-				},
-			},
-			render: ({text, bgColor, textColor}) => (
-				<Footer bgColor={bgColor} textColor={textColor} text={text} />
-			),
-			defaultProps: {
-				text: "© 2024 My Company. All rights reserved.",
-				bgColor: "#333333",
-				textColor: "#ffffff",
-			},
-		},
+Footer: {
+  fields: {
+    companyName: {
+      type: "text",
+      label: "Company Name",
+    },
+
+    year: {
+      type: "number",
+      label: "Year",
+    },
+
+    cvr: {
+      type: "text",
+      label: "CVR Number",
+    },
+
+    bgColor: {
+      type: "custom",
+      render: ColorPicker,
+    },
+
+    textColor: {
+      type: "custom",
+      render: ColorPicker,
+    },
+
+    sections: {
+      type: "array",
+      label: "Footer Sections",
+
+      arrayFields: {
+        title: {
+          type: "text",
+        },
+
+        items: {
+          type: "array",
+
+          arrayFields: {
+            text: {
+              type: "text",
+            },
+
+            href: {
+              type: "text",
+            },
+          },
+        },
+      },
+    },
+
+    socialLinks: {
+      type: "array",
+      label: "Social Media",
+
+      arrayFields: {
+        platform: {
+          type: "select",
+
+          options: [
+            {
+              label: "Instagram",
+              value: "instagram",
+            },
+            {
+              label: "Facebook",
+              value: "facebook",
+            },
+            {
+              label: "LinkedIn",
+              value: "linkedin",
+            },
+            {
+              label: "YouTube",
+              value: "youtube",
+            },
+            {
+              label: "Twitter",
+              value: "x",
+            },
+          ],
+        },
+
+        href: {
+          type: "text",
+          label: "Link",
+        },
+      },
+    },
+  },
+
+  render: (props) => (
+    <Footer {...props} />
+  ),
+
+  defaultProps: {
+    companyName: "My Company ApS",
+    year: new Date().getFullYear(),
+    cvr: "12345678",
+
+    bgColor: "#333333",
+    textColor: "#ffffff",
+
+    sections: [
+      {
+        title: "Company",
+        items: [
+          {
+            text: "About",
+            href: "/about",
+          },
+          {
+            text: "Contact",
+            href: "/contact",
+          },
+        ],
+      },
+    ],
+
+    socialLinks: [
+      {
+        platform: "instagram",
+        href: "https://instagram.com",
+      },
+      {
+        platform: "linkedin",
+        href: "https://linkedin.com",
+      },
+    ],
+  },
+},
 		// Contact: {
 		// 	fields: {
 		// 		title: {

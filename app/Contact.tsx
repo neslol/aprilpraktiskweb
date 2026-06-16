@@ -17,7 +17,7 @@ const initialFormState: ContactFormState = {
 };
 
 const Contact = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState<ContactFormState>(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -42,7 +42,7 @@ const Contact = () => {
     setForm((current) => ({ ...current, [field]: value }));
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
     setFeedback(null);
@@ -102,7 +102,6 @@ const Contact = () => {
       <div className="relative w-full max-w-2xl overflow-hidden rounded-[2rem] border border-white/15 bg-[#0f172a]/95 shadow-2xl shadow-black/50">
         <div className="flex items-start justify-between border-b border-white/10 px-6 py-5">
           <div>
-            <p className="text-xs uppercase tracking-[0.35em] text-white/50">Popup</p>
             <h2 id="contact-title" className="mt-2 text-3xl font-semibold">
               Kontakt
             </h2>

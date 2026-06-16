@@ -37,14 +37,14 @@ const Heading = ({ title, logo, logoAlt, backgroundColor, textColor, menuItems }
       <header
         className="fixed inset-x-0 top-0 z-50 p-5 md:px-10 lg:px-20 xl:px-40 transition-colors duration-300"
         style={{
-          backgroundColor: isPastHero ? "transparent" : backgroundColor,
+          backgroundColor: isPastHero ? backgroundColor : "transparent",
           color: textColor,
         }}
       >
         <div className="flex flex-row items-center justify-between text-2xl">
           <div className="flex gap-5">
             <img className="w-full h-10" src={logo} alt={logoAlt} />
-            <p style={{ opacity: isPastHero ? 0 : 1 }}>{title}</p>
+            <p style={{ opacity: isPastHero ? 1 : 0 }}>{title}</p>
           </div>
           <button
             type="button"

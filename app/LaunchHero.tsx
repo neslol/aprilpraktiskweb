@@ -6,17 +6,15 @@ export type HeroButton = {
   buttonTextColor?: string;
 };
 
-export type HeroProps = {
+export type LaunchHeroProps = {
   heroRef?: RefObject<HTMLElement | null>;
   bgHeroUrl?: string;
   textColor?: string;
-  title?: string;
-  subtitle?: string;
   items?: HeroButton[];
 };
 
 
-const LaunchHero = ({ heroRef, bgHeroUrl, textColor, title, items = [] }: HeroProps) => {
+const LaunchHero = ({ heroRef, bgHeroUrl, textColor, items = [] }: LaunchHeroProps) => {
     return (
         <section className="grid grid-cols-2">
             <section
