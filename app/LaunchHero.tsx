@@ -9,12 +9,13 @@ export type HeroButton = {
 export type LaunchHeroProps = {
   heroRef?: RefObject<HTMLElement | null>;
   bgHeroUrl?: string;
+  bgHeroUrl2?: string;
   textColor?: string;
   items?: HeroButton[];
 };
 
 
-const LaunchHero = ({ heroRef, bgHeroUrl, textColor, items = [] }: LaunchHeroProps) => {
+const LaunchHero = ({ heroRef, bgHeroUrl, bgHeroUrl2, textColor, items = [] }: LaunchHeroProps) => {
     return (
         <section className="grid grid-cols-2">
             <section
@@ -42,7 +43,7 @@ const LaunchHero = ({ heroRef, bgHeroUrl, textColor, items = [] }: LaunchHeroPro
             <section
                 ref={heroRef}
                 id="hero"
-                style={{ backgroundImage: `url(${bgHeroUrl})`, color: textColor }}
+                style={{ backgroundImage: `url(${bgHeroUrl2})`, color: textColor }}
                 className="relative h-screen overflow-hidden bg-center bg-cover text-xl"
             >
                 <div className="backdrop-brightness-50 absolute inset-0 flex flex-col items-center justify-center text-center gap-4">
