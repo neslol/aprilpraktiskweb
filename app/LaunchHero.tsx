@@ -1,66 +1,60 @@
 import type { RefObject } from "react";
 
-export type HeroButton = {
-  title?: string;
-  url?: string;
-  buttonTextColor?: string;
-};
-
 export type LaunchHeroProps = {
   heroRef?: RefObject<HTMLElement | null>;
   bgHeroUrl?: string;
   bgHeroUrl2?: string;
   textColor?: string;
-  items?: HeroButton[];
+  buttonTitle1?: string;
+  buttonurl1?: string;
+  buttonTextColor1?: string;
+    buttonTitle2?: string;
+  buttonurl2?: string;
+  buttonTextColor2?: string;
 };
 
 
-const LaunchHero = ({ heroRef, bgHeroUrl, bgHeroUrl2, textColor, items = [] }: LaunchHeroProps) => {
+const LaunchHero = ({ heroRef, bgHeroUrl, bgHeroUrl2, textColor, buttonTitle1, buttonurl1, buttonTextColor1, buttonTitle2, buttonurl2, buttonTextColor2 }: LaunchHeroProps) => {
     return (
-        <section className="grid grid-cols-2">
+        <section style={{ color: textColor }} 
+        className="grid grid-cols-2">
             <section
                 ref={heroRef}
                 id="hero"
-                style={{ backgroundImage: `url(${bgHeroUrl})`, color: textColor }}
+                style={{ backgroundImage: `url(${bgHeroUrl})`}}
                 className="relative h-screen overflow-hidden bg-center bg-cover text-xl"
             >
+                <a href={buttonurl1 ?? "#"}>
                 <div className="backdrop-brightness-50 absolute inset-0 flex flex-col items-center justify-center text-center gap-4">
                     <div className="flex flex-col text-center gap-6 mt-4">
-                        {(items.length > 0 ? items : [
-                        ]).map((item, index) => (
-                        <a
-                            key={`${item.title ?? "hero-link"}-${index}`}
-                            href={item.url ?? "#"}
-                            style={{ color: item.buttonTextColor }}
+                        <p
+                            style={{ color: buttonTextColor1 }}
                             className={`flex items-center gap-2 text-6xl font-bold max-w-62.5 sm:max-w-125`}
                         >
-                            {item.title}
-                        </a>
-                        ))}
+                            {buttonTitle1}
+                        </p>
                     </div>
-                </div>    
+                </div>   
+                </a>
             </section>
             <section
                 ref={heroRef}
                 id="hero"
-                style={{ backgroundImage: `url(${bgHeroUrl2})`, color: textColor }}
+                style={{ backgroundImage: `url(${bgHeroUrl2})`}}
                 className="relative h-screen overflow-hidden bg-center bg-cover text-xl"
             >
+                <a href={buttonurl2 ?? "#"}>
                 <div className="backdrop-brightness-50 absolute inset-0 flex flex-col items-center justify-center text-center gap-4">
                     <div className="flex flex-col text-center gap-6 mt-4">
-                        {(items.length > 0 ? items : [
-                        ]).map((item, index) => (
-                        <a
-                            key={`${item.title ?? "hero-link"}-${index}`}
-                            href={item.url ?? "#"}
-                            style={{ color: item.buttonTextColor }}
+                        <p
+                            style={{ color: buttonTextColor2 }}
                             className={`flex items-center gap-2 text-6xl font-bold max-w-62.5 sm:max-w-125`}
                         >
-                            {item.title}
-                        </a>
-                        ))}
+                            {buttonTitle2}
+                        </p>
                     </div>
-                </div>    
+                </div>   
+                </a> 
             </section>
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
                 <svg

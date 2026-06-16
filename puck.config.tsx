@@ -424,42 +424,64 @@ const config: Config<Props> = {
 					type: "custom",
 					render: ImagePicker,
 				},
+				bgHeroUrl2: {
+					type: "custom",
+					render: ImagePicker,
+				},
 				textColor: {
 					type: "custom",
 					render: ColorPicker,
 				},
-				items: {
-					type: "array",
-					label: "Hero items",
-					arrayFields: {
-						title: {
-							type: "text",
-							label: "Item title",
-						},
-						buttonTextColor: {
-							type: "custom",
-							render: ColorPicker,
-						},
-						url: {
-							type: "text",
-							label: "Link URL",
-						},
-					},
+				buttonTitle1: {
+					type: "text",
+					label: "Button 1 Title",
 				},
+				buttonurl1: {
+					type: "text",
+					label: "Button 1 Link URL",
+				},
+				buttonTextColor1: {
+					type: "custom",
+					render: ColorPicker,
+				},
+				buttonTitle2: {
+					type: "text",
+					label: "Button 2 Title",
+				},
+				buttonurl2: {
+					type: "text",
+					label: "Button 2 Link URL",
+				},
+				buttonTextColor2: {
+					type: "custom",
+					render: ColorPicker,
+				},
+
 			},
-			render: ({bgHeroUrl, textColor, items = []}) => (
+			render: ({bgHeroUrl, bgHeroUrl2, textColor, buttonTitle1, buttonurl1, buttonTextColor1, buttonTitle2, buttonurl2, buttonTextColor2}) => (
 				<LaunchHero
 					bgHeroUrl={bgHeroUrl}
+					bgHeroUrl2={bgHeroUrl2}
 					textColor={textColor}
-					items={items}
+					buttonTitle1={buttonTitle1}
+					buttonurl1={buttonurl1}
+					buttonTextColor1={buttonTextColor1}
+					buttonTitle2={buttonTitle2}
+					buttonurl2={buttonurl2}
+					buttonTextColor2={buttonTextColor2}
+					
 				/>
 			),
 			defaultProps: {
 				bgHeroUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
 				textColor: "#ffffff",
-				items: [
-					{ title: "Launch Product", buttonTextColor: "#ffffff", url: "#" },
-				],
+				buttonTitle1: "Button 1",
+				buttonurl1: "#",
+				buttonTextColor1: "#ffffff",
+				bgHeroUrl2: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+				buttonTitle2: "Button 2",
+				buttonurl2: "#",
+				buttonTextColor2: "#ffffff",
 			},
 		},
 
