@@ -29,7 +29,7 @@ const LaunchHero = ({ heroRef, bgHeroUrl, bgHeroUrl2, textColor, buttonTitle1, b
                     <div className="flex flex-col text-center gap-6 mt-4">
                         <p
                             style={{ color: buttonTextColor1 }}
-                            className={`flex items-center gap-2 text-6xl font-bold max-w-62.5 sm:max-w-125`}
+                            className={`flex items-center gap-2 text-4xl font-bold max-w-62.5 sm:max-w-125`}
                         >
                             {buttonTitle1}
                         </p>
@@ -48,7 +48,7 @@ const LaunchHero = ({ heroRef, bgHeroUrl, bgHeroUrl2, textColor, buttonTitle1, b
                     <div className="flex flex-col text-center gap-6 mt-4">
                         <p
                             style={{ color: buttonTextColor2 }}
-                            className={`flex items-center gap-2 text-6xl font-bold max-w-62.5 sm:max-w-125`}
+                            className={`flex items-center gap-2 text-4xl font-bold max-w-62.5 sm:max-w-125`}
                         >
                             {buttonTitle2}
                         </p>
