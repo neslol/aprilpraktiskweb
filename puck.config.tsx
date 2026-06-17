@@ -1,4 +1,4 @@
-import {Config, Slot} from "@puckeditor/core";
+import {Config, Slot, usePuck} from "@puckeditor/core";
 import ImagePicker from "@/app/admin/editor/[[...puckPath]]/ImagePicker";
 import Accordion, {AccordionProps} from "@/app/Accordion";
 import Heading, {HeadingProps} from "@/app/Heading";
@@ -254,6 +254,11 @@ const config: Config<Props> = {
         },
         Heading: {
             fields: {
+                editorPreviewOpen: {
+                    type: "custom",
+                    label: "Åbn menuen, husk at slå dette fra!",
+                    render: BooleanToggle,
+                },
                 title: {
                     type: "text",
                     label: "Website Name / Brand Title",
@@ -298,7 +303,9 @@ const config: Config<Props> = {
                     }
                 },
             },
-            render: ({title, logo, logoAlt, backgroundColor, textColor, backgroundColorMenuItems, menuItems}) => (
+            render: ({editorPreviewOpen, title, logo, logoAlt, backgroundColor, textColor, backgroundColorMenuItems, menuItems}) => {
+
+                return (
                     <Heading
                         title={title}
                         logo={logo}
@@ -307,9 +314,12 @@ const config: Config<Props> = {
                         textColor={textColor}
                         backgroundColorMenuItems={backgroundColorMenuItems}
                         menuItems={menuItems}
+                        editorPreviewOpen={editorPreviewOpen}
                     />
-                ),
+                );
+            },
                 defaultProps: {
+                    editorPreviewOpen: false,
                         title:"My Website",
                         logo:"https://upload.wikimedia.org/wikipedia/commons/a/ab/Android_O_Preview_Logo.png",
                         logoAlt:"Logo",
@@ -781,21 +791,26 @@ const config: Config<Props> = {
         },
         Contact: {
             fields: {
+                editorPreviewOpen: {
+                    type: "custom",
+                    label: "Åbn kontaktformularen, husk at slå dette fra!",
+                    render: BooleanToggle,
+                },
                 namePlaceholder: {
                     type: "text",
-                    label: "Name Input Placeholder Text",
+                    label: "Navn placeholder",
                 },
                 emailPlaceholder: {
                     type: "text",
-                    label: "Email Input Placeholder Text",
+                    label: "Email placeholder",
                 },
                 phonePlaceholder: {
                     type: "text",
-                    label: "Phone Input Placeholder Text",
+                    label: "Tlf.nr. placeholder",
                 },
                 messagePlaceholder: {
                     type: "text",
-                    label: "Message Textarea Placeholder Text",
+                    label: "Besked el.lign placeholder",
                 },
                 buttonStrokeColor: {
                     type: "custom",
@@ -828,8 +843,11 @@ const config: Config<Props> = {
                     render: ColorPicker,
                 },
             },
-            render: ({namePlaceholder, emailPlaceholder, phonePlaceholder, messagePlaceholder, buttonStrokeColor, primaryBgColor, primaryBgHoverColor, accentBgColor, accentBgHoverColor, accentFocusColor}) => (
+            render: ({editorPreviewOpen, namePlaceholder, emailPlaceholder, phonePlaceholder, messagePlaceholder, buttonStrokeColor, primaryBgColor, primaryBgHoverColor, accentBgColor, accentBgHoverColor, accentFocusColor}) => {
+
+                return (
                     <Contact
+                        editorPreviewOpen={editorPreviewOpen}
                         namePlaceholder={namePlaceholder}
                         emailPlaceholder={emailPlaceholder}
                         phonePlaceholder={phonePlaceholder}
@@ -841,8 +859,10 @@ const config: Config<Props> = {
                         accentBgHoverColor={accentBgHoverColor}
                         accentFocusColor={accentFocusColor}
                     />
-                ),
+                );
+            },
                 defaultProps: {
+                editorPreviewOpen: false,
                 namePlaceholder: "Navne Navnesen",
                 emailPlaceholder: "navne@navnesen.dk",
                 phonePlaceholder: "12345678",
