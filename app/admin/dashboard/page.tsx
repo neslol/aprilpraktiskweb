@@ -748,64 +748,78 @@ useEffect(() => {
       )}
 
       {/* Create User Modal */}
-      {isCreatingUser && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-gray-200">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Create New User</h3>
-            <p className="text-sm text-gray-500 mb-6">Enter details for the new administrative user.</p>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Email</label>
-                <input 
-                  type="email" 
-                  value={newUsername}
-                  onChange={(e) => setNewUsername(e.target.value)}
-                  placeholder="john@example.com"
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  autoFocus
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Password</label>
-                <input 
-                  type="password" 
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Role</label>
-                <select 
-                  value={newRole}
-                  onChange={(e) => setNewRole(e.target.value)}
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                >
-                  <option value="admin">Admin</option>
-                  <option value="editor">Editor</option>
-                </select>
-              </div>
-              
-              <div className="flex gap-3 justify-end mt-8">
-                <button 
-                  onClick={() => setIsCreatingUser(false)}
-                  className="rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
-                >
-                  Cancel
-                </button>
-                <button 
-                  onClick={createUser}
-                  className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-blue-700 transition-colors"
-                >
-                  Create User
-                </button>
-              </div>
-            </div>
-          </div>
+{isCreatingUser && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+    {/* Changed container to a form element */}
+    <form 
+      onSubmit={(e) => {
+        e.preventDefault(); // Prevents page reload
+        // Additional JS check just to be safe
+        if (newUsername.includes('@')) {
+          createUser();
+        }
+      }}
+      className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-gray-200"
+    >
+      <h3 className="text-lg font-bold text-gray-900 mb-2">Create New User</h3>
+      <p className="text-sm text-gray-500 mb-6">Enter details for the new administrative user.</p>
+      
+      <div className="space-y-4">
+        <div>
+          <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Email</label>
+          <input 
+            type="email" 
+            value={newUsername}
+            onChange={(e) => setNewUsername(e.target.value)}
+            placeholder="john@example.com"
+            required // <-- Forces the field to be filled out
+            className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            autoFocus
+          />
         </div>
-      )}
+        <div>
+          <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Password</label>
+          <input 
+            type="password" 
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            placeholder="••••••••"
+            required // <-- Ensures password isn't blank
+            className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Role</label>
+          <select 
+            value={newRole}
+            onChange={(e) => setNewRole(e.target.value)}
+            className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <option value="admin">Admin</option>
+            <option value="editor">Editor</option>
+          </select>
+        </div>
+        
+        <div className="flex gap-3 justify-end mt-8">
+          <button 
+            type="button" // <-- Explicitly set to button so it doesn't trigger form submission
+            onClick={() => setIsCreatingUser(false)}
+            className="rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
+          >
+            Cancel
+          </button>
+          <button 
+            type="submit" // <-- Triggers form validation and onSubmit
+            disabled={!newUsername.includes('@') || !newPassword} // <-- Disables button visually if invalid
+            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Create User
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+)}
 
       {/* Rename Modal */}
       {isRenaming && (

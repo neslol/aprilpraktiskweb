@@ -2,6 +2,28 @@
 
 import { useEffect, useState } from "react";
 
+// 1. Define the component's Puck-compatible Props
+export type ContactProps = {
+  // Localization & Texts
+  title?: string;
+  buttonCancelText?: string;
+  buttonSubmitText?: string;
+  buttonSubmittingText?: string;
+  
+  // Placeholders
+  namePlaceholder?: string;
+  emailPlaceholder?: string;
+  phonePlaceholder?: string;
+  messagePlaceholder?: string;
+
+  // Custom Colors (Matching your project's styling convention)
+  primaryBgColor?: string;     // Modals and floating buttons (e.g., "#0f172a")
+  primaryBgHoverColor?: string;// Hover states for dark buttons (e.g., "#1e293b")
+  accentBgColor?: string;      // The main CTA button color (e.g., "#f7b801")
+  accentBgHoverColor?: string; // Accent button hover color (e.g., "#ffd24d")
+  accentFocusColor?: string;   // Input border focus rings (e.g., "#f7b801")
+};
+
 type ContactFormState = {
   name: string;
   email: string;
@@ -16,16 +38,32 @@ const initialFormState: ContactFormState = {
   message: "",
 };
 
-const Contact = () => {
+const Contact = ({
+  title = "Kontakt",
+  buttonCancelText = "Annuller",
+  buttonSubmitText = "Send besked",
+  buttonSubmittingText = "Sender...",
+  namePlaceholder = "Dit navn",
+  emailPlaceholder = "din@email.dk",
+  phonePlaceholder = "Valgfrit",
+  messagePlaceholder = "Skriv din besked her...",
+  primaryBgColor = "#0f172a",
+  primaryBgHoverColor = "#1e293b",
+  accentBgColor = "#f7b801",
+  accentBgHoverColor = "#ffd24d",
+  accentFocusColor = "#f7b801",
+}: ContactProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState<ContactFormState>(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
 
+  // Hover states managed via JS to cleanly handle random hex colors from Puck
+  const [isPrimaryHovered, setIsPrimaryHovered] = useState(false);
+  const [isAccentHovered, setIsAccentHovered] = useState(false);
+
   useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
+    if (!isOpen) return;
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -34,7 +72,6 @@ const Contact = () => {
     };
 
     window.addEventListener("keydown", handleEscape);
-
     return () => window.removeEventListener("keydown", handleEscape);
   }, [isOpen]);
 
@@ -73,15 +110,23 @@ const Contact = () => {
     }
   };
 
+  // Focus style variable setup
+  const inputStyle = {
+    "--tw-focus-color": accentFocusColor,
+  } as React.CSSProperties;
+
   if (!isOpen) {
     return (
       <div className="fixed bottom-6 right-6 z-50">
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="rounded-full bg-[#0f172a] px-5 py-3 text-sm font-semibold text-white shadow-2xl shadow-black/30 ring-1 ring-white/20 transition hover:bg-[#1e293b]"
+          onMouseEnter={() => setIsPrimaryHovered(true)}
+          onMouseLeave={() => setIsPrimaryHovered(false)}
+          style={{ backgroundColor: isPrimaryHovered ? primaryBgHoverColor : primaryBgColor }}
+          className="rounded-full px-5 py-3 text-sm font-semibold text-white shadow-2xl shadow-black/30 ring-1 ring-white/20 transition"
         >
-          Åbn kontaktformular
+          Åbn Kontaktformular
         </button>
       </div>
     );
@@ -99,11 +144,14 @@ const Contact = () => {
         }
       }}
     >
-      <div className="relative w-full max-w-2xl overflow-hidden rounded-4xl border border-white/15 bg-[#0f172a]/95 shadow-2xl shadow-black/50">
+      <div 
+        style={{ backgroundColor: `${primaryBgColor}f2` }} // Adds minor transparency (95%) matching your original bg-[#0f172a]/95
+        className="relative w-full max-w-2xl overflow-hidden rounded-4xl border border-white/15 shadow-2xl shadow-black/50"
+      >
         <div className="flex items-start justify-between border-b border-white/10 px-6 py-5">
           <div>
             <h2 id="contact-title" className="mt-2 text-3xl font-semibold">
-              Kontakt
+              {title}
             </h2>
           </div>
           <button
@@ -121,12 +169,13 @@ const Contact = () => {
             <label className="grid gap-2">
               <span className="text-sm font-medium text-white/80">Navn</span>
               <input
-                className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:border-[#f7b801] focus:bg-white/10"
+                style={inputStyle}
+                className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:bg-white/10 focus:border-[var(--tw-focus-color)]"
                 type="text"
                 name="name"
                 value={form.name}
                 onChange={(event) => updateField("name", event.target.value)}
-                placeholder="Dit navn"
+                placeholder={namePlaceholder}
                 required
               />
             </label>
@@ -134,12 +183,13 @@ const Contact = () => {
             <label className="grid gap-2">
               <span className="text-sm font-medium text-white/80">Email</span>
               <input
-                className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:border-[#f7b801] focus:bg-white/10"
+                style={inputStyle}
+                className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:bg-white/10 focus:border-[var(--tw-focus-color)]"
                 type="email"
                 name="email"
                 value={form.email}
                 onChange={(event) => updateField("email", event.target.value)}
-                placeholder="din@email.dk"
+                placeholder={emailPlaceholder}
                 required
               />
             </label>
@@ -148,23 +198,25 @@ const Contact = () => {
           <label className="grid gap-2">
             <span className="text-sm font-medium text-white/80">Telefon</span>
             <input
-              className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:border-[#f7b801] focus:bg-white/10"
+              style={inputStyle}
+              className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:bg-white/10 focus:border-[var(--tw-focus-color)]"
               type="tel"
               name="phone"
               value={form.phone}
               onChange={(event) => updateField("phone", event.target.value)}
-              placeholder="Valgfrit"
+              placeholder={phonePlaceholder}
             />
           </label>
 
           <label className="grid gap-2">
             <span className="text-sm font-medium text-white/80">Besked</span>
             <textarea
-              className="min-h-40 rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:border-[#f7b801] focus:bg-white/10"
+              style={inputStyle}
+              className="min-h-40 rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:bg-white/10 focus:border-[var(--tw-focus-color)]"
               name="message"
               value={form.message}
               onChange={(event) => updateField("message", event.target.value)}
-              placeholder="Skriv din besked her..."
+              placeholder={messagePlaceholder}
               required
             />
           </label>
@@ -181,14 +233,17 @@ const Contact = () => {
               onClick={() => setIsOpen(false)}
               className="rounded-xl border border-white/15 px-5 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/10 hover:text-white"
             >
-              Annuller
+              {buttonCancelText}
             </button>
             <button
-              className="rounded-xl bg-[#f7b801] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#ffd24d] disabled:cursor-not-allowed disabled:opacity-60"
+              onMouseEnter={() => setIsAccentHovered(true)}
+              onMouseLeave={() => setIsAccentHovered(false)}
+              style={{ backgroundColor: isAccentHovered ? accentBgHoverColor : accentBgColor }}
+              className="rounded-xl px-6 py-3 text-sm font-semibold text-black transition disabled:cursor-not-allowed disabled:opacity-60"
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Sender..." : "Send besked"}
+              {isSubmitting ? buttonSubmittingText : buttonSubmitText}
             </button>
           </div>
         </form>
