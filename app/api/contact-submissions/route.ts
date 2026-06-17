@@ -1,6 +1,22 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisme";
 
+export async function GET() {
+  try {
+    // Fetch submissions ordered by the newest first
+    const submissions = await prisma.contactSubmission.findMany({
+      orderBy: {
+        createdAt: "desc", // Assumes your schema has a createdAt field
+      },
+    });
+
+    return NextResponse.json(submissions, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching submissions:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}
+
 export async function POST(request: Request) {
 	try {
 		const body = (await request.json()) as {

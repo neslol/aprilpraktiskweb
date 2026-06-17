@@ -43,8 +43,10 @@ const Heading = ({ title, logo, logoAlt, backgroundColor, textColor, menuItems }
       >
         <div className="flex flex-row items-center justify-between text-2xl">
           <div className="flex gap-5">
+            <a href="/">
             <img className="w-full h-10" src={logo} alt={logoAlt} />
             <p style={{ opacity: isPastHero ? 1 : 0 }}>{title}</p>
+            </a>
           </div>
           <button
             type="button"

@@ -64,7 +64,7 @@ const Contact = () => {
         throw new Error(errorData?.error ?? "Noget gik galt under afsendelsen.");
       }
 
-      setFeedback("Beskeden blev sendt og gemt i databasen.");
+      setFeedback("Dine oplysninger er sendt! Vi vender tilbage hurtigst muligt.");
       setForm(initialFormState);
     } catch (error) {
       setFeedback(error instanceof Error ? error.message : "Kunne ikke sende beskeden.");
@@ -99,7 +99,7 @@ const Contact = () => {
         }
       }}
     >
-      <div className="relative w-full max-w-2xl overflow-hidden rounded-[2rem] border border-white/15 bg-[#0f172a]/95 shadow-2xl shadow-black/50">
+      <div className="relative w-full max-w-2xl overflow-hidden rounded-4xl border border-white/15 bg-[#0f172a]/95 shadow-2xl shadow-black/50">
         <div className="flex items-start justify-between border-b border-white/10 px-6 py-5">
           <div>
             <h2 id="contact-title" className="mt-2 text-3xl font-semibold">
