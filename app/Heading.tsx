@@ -13,7 +13,7 @@ export type HeadingProps = {
     href: string;
   }[];
 };
-const Heading = ({ title, logo, logoAlt, backgroundColor, textColor, menuItems }: HeadingProps) => {
+const Heading = ({ title, logo, logoAlt, backgroundColor, textColor, backgroundColorMenuItems, menuItems }: HeadingProps) => {
   const [isPastHero, setIsPastHero] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -60,8 +60,8 @@ const Heading = ({ title, logo, logoAlt, backgroundColor, textColor, menuItems }
           </button>
         </div>
         {isMenuOpen ? (
-          <div 
-          className="mt-4 overflow-hidden rounded-3xl border border-white/15 bg-black/90 shadow-2xl backdrop-blur-md">
+          <div style={{ backgroundColor: backgroundColorMenuItems }}
+          className="mt-4 overflow-hidden rounded-3xl border border-white/15 shadow-2xl backdrop-blur-md">
             <nav aria-label="Primary" className="flex flex-col p-2">
               {menuItems.map((item) => (
                 <a
