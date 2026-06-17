@@ -7,6 +7,7 @@ export type HeadingProps = {
   logoAlt: string;
   backgroundColor: string;
   textColor: string;
+  backgroundColorMenuItems: string;
   menuItems: {
     label: string;
     href: string;
@@ -59,7 +60,8 @@ const Heading = ({ title, logo, logoAlt, backgroundColor, textColor, menuItems }
           </button>
         </div>
         {isMenuOpen ? (
-          <div className="mt-4 overflow-hidden rounded-3xl border border-white/15 bg-black/90 shadow-2xl backdrop-blur-md">
+          <div 
+          className="mt-4 overflow-hidden rounded-3xl border border-white/15 bg-black/90 shadow-2xl backdrop-blur-md">
             <nav aria-label="Primary" className="flex flex-col p-2">
               {menuItems.map((item) => (
                 <a

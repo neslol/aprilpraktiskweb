@@ -4,11 +4,6 @@ import { useEffect, useState } from "react";
 
 // 1. Define the component's Puck-compatible Props
 export type ContactProps = {
-  // Localization & Texts
-  title?: string;
-  buttonCancelText?: string;
-  buttonSubmitText?: string;
-  buttonSubmittingText?: string;
   
   // Placeholders
   namePlaceholder?: string;
@@ -19,6 +14,7 @@ export type ContactProps = {
   // Custom Colors (Matching your project's styling convention)
   primaryBgColor?: string;     // Modals and floating buttons (e.g., "#0f172a")
   primaryBgHoverColor?: string;// Hover states for dark buttons (e.g., "#1e293b")
+  buttonStrokeColor?: string;     // Border color for buttons (e.g., "#ffffff80")
   accentBgColor?: string;      // The main CTA button color (e.g., "#f7b801")
   accentBgHoverColor?: string; // Accent button hover color (e.g., "#ffd24d")
   accentFocusColor?: string;   // Input border focus rings (e.g., "#f7b801")
@@ -39,19 +35,16 @@ const initialFormState: ContactFormState = {
 };
 
 const Contact = ({
-  title = "Kontakt",
-  buttonCancelText = "Annuller",
-  buttonSubmitText = "Send besked",
-  buttonSubmittingText = "Sender...",
-  namePlaceholder = "Dit navn",
-  emailPlaceholder = "din@email.dk",
-  phonePlaceholder = "Valgfrit",
-  messagePlaceholder = "Skriv din besked her...",
-  primaryBgColor = "#0f172a",
-  primaryBgHoverColor = "#1e293b",
-  accentBgColor = "#f7b801",
-  accentBgHoverColor = "#ffd24d",
-  accentFocusColor = "#f7b801",
+  namePlaceholder,
+  emailPlaceholder,
+  phonePlaceholder,
+  messagePlaceholder,
+  primaryBgColor,
+  primaryBgHoverColor,
+  buttonStrokeColor,
+  accentBgColor,
+  accentBgHoverColor,
+  accentFocusColor,
 }: ContactProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState<ContactFormState>(initialFormState);
@@ -117,16 +110,19 @@ const Contact = ({
 
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 right-6 z-50">
+      <div style={{ color: buttonStrokeColor ?? "#ffffff80" }} 
+      className="fixed bottom-4 left-4 z-50">
         <button
           type="button"
           onClick={() => setIsOpen(true)}
           onMouseEnter={() => setIsPrimaryHovered(true)}
           onMouseLeave={() => setIsPrimaryHovered(false)}
           style={{ backgroundColor: isPrimaryHovered ? primaryBgHoverColor : primaryBgColor }}
-          className="rounded-full px-5 py-3 text-sm font-semibold text-white shadow-2xl shadow-black/30 ring-1 ring-white/20 transition"
+          className="rounded-full px-2 py-2 flex h-10 w-10 items-center justify-center border-2 shadow-lg transition-transform duration-300 hover:scale-105 active:scale-95 md:bottom-6 md:right-6 md:h-12 md:w-12"
         >
-          Åbn Kontaktformular
+          <svg xmlns="http://www.w3.org/2000/svg" stroke="currentColor" viewBox="0 0 640 640" className="h-10 w-10 fill-current">
+          <path d="M125.4 128C91.5 128 64 155.5 64 189.4C64 190.3 64 191.1 64.1 192L64 192L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 192L575.9 192C575.9 191.1 576 190.3 576 189.4C576 155.5 548.5 128 514.6 128L125.4 128zM528 256.3L528 448C528 456.8 520.8 464 512 464L128 464C119.2 464 112 456.8 112 448L112 256.3L266.8 373.7C298.2 397.6 341.7 397.6 373.2 373.7L528 256.3zM112 189.4C112 182 118 176 125.4 176L514.6 176C522 176 528 182 528 189.4C528 193.6 526 197.6 522.7 200.1L344.2 335.5C329.9 346.3 310.1 346.3 295.8 335.5L117.3 200.1C114 197.6 112 193.6 112 189.4z"/>
+          </svg>
         </button>
       </div>
     );
@@ -151,7 +147,7 @@ const Contact = ({
         <div className="flex items-start justify-between border-b border-white/10 px-6 py-5">
           <div>
             <h2 id="contact-title" className="mt-2 text-3xl font-semibold">
-              {title}
+              Kontakt
             </h2>
           </div>
           <button
@@ -233,7 +229,7 @@ const Contact = ({
               onClick={() => setIsOpen(false)}
               className="rounded-xl border border-white/15 px-5 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/10 hover:text-white"
             >
-              {buttonCancelText}
+              Annuller
             </button>
             <button
               onMouseEnter={() => setIsAccentHovered(true)}
@@ -243,7 +239,7 @@ const Contact = ({
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? buttonSubmittingText : buttonSubmitText}
+              {isSubmitting ? "Sender..." : "Send besked"}
             </button>
           </div>
         </form>
