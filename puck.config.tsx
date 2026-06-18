@@ -86,16 +86,16 @@ type Props = {
         alt: string;
     };
     Heading: HeadingProps;
-    ScrollButton: ScrollButtonProps;
+    "Scroll Button": ScrollButtonProps;
     Accordion: AccordionProps;
     Hero: HeroProps;
-    MainSec: MainSecProps;
-    CtaSec: CtaSecProps;
-    BgSec: BgSecProps;
+    "Main Section": MainSecProps;
+    "Call To Action Section": CtaSecProps;
+    "Background Section": BgSecProps;
     Button: ButtonProps;
     Lightbox: LightboxProps;
     Footer: FooterProps;
-    LaunchHero: LaunchHeroProps;
+    "Launch Hero": LaunchHeroProps;
     Contact: ContactProps;
 };
 
@@ -105,8 +105,8 @@ const config: Config<Props> = {
         Layout: { components: ["Columns"] },
         Typography: { components: ["Text"] },
         Media: { components: ["Image", "Lightbox"] },
-        Sections: { components: ["Hero", "LaunchHero", "MainSec", "CtaSec", "BgSec"] },
-        Navigation: { components: ["Heading", "ScrollButton", "Footer"] },
+        Sections: { components: ["Hero", "Launch Hero", "Main Section", "Call To Action Section", "Background Section"] },
+        Navigation: { components: ["Heading", "Scroll Button", "Footer"] },
         Interactive: { components: ["Accordion", "Button", "Contact"] }
     },
     components: {
@@ -334,7 +334,7 @@ const config: Config<Props> = {
                         ],
                 }
             },
-            ScrollButton: {
+            "Scroll Button": {
                 fields: {
                     scrollButtonColor: {
                         type: "custom",
@@ -420,7 +420,7 @@ const config: Config<Props> = {
             },
         },
 
-        LaunchHero: {
+        "Launch Hero": {
             fields: {
                 bgHeroUrl: {
                     type: "custom",
@@ -492,7 +492,7 @@ const config: Config<Props> = {
             },
         },
                       
-        MainSec: {
+        "Main Section": {
             fields: {
                 title: {
                     type: "text",
@@ -581,7 +581,7 @@ const config: Config<Props> = {
                 buttonHref: "#",
             },
         },
-        CtaSec: {
+        "Call To Action Section": {
             fields: {
                 title: {
                     type: "text",
@@ -649,7 +649,7 @@ const config: Config<Props> = {
                 imageAlt: "Placeholder image",
             },
         },
-        BgSec: {
+        "Background Section": {
             fields: {
                 bgImageUrl: {
                     type: "custom",
