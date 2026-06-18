@@ -95,7 +95,7 @@ type Props = {
     Button: ButtonProps;
     Lightbox: LightboxProps;
     Footer: FooterProps;
-    "Launch Hero": LaunchHeroProps;
+    "Split Screen Hero": LaunchHeroProps;
     Contact: ContactProps;
 };
 
@@ -105,7 +105,7 @@ const config: Config<Props> = {
         Layout: { components: ["Columns"] },
         Typography: { components: ["Text"] },
         Media: { components: ["Image", "Lightbox"] },
-        Sections: { components: ["Hero", "Launch Hero", "Main Section", "Call To Action Section", "Background Section"] },
+        Sections: { components: ["Hero", "Split Screen Hero", "Main Section", "Call To Action Section", "Background Section"] },
         Navigation: { components: ["Heading", "Scroll Button", "Footer"] },
         Interactive: { components: ["Accordion", "Button", "Contact"] }
     },
@@ -420,7 +420,7 @@ const config: Config<Props> = {
             },
         },
 
-        "Launch Hero": {
+        "Split Screen Hero": {
             fields: {
                 bgHeroUrl: {
                     type: "custom",
