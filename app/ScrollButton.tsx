@@ -10,7 +10,7 @@ const ScrollButton = ({scrollButtonColor, scrollButtonArrowColor }: ScrollButton
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Scroll to top"
       style={{ backgroundColor: scrollButtonColor ?? "#2F5B78", color: scrollButtonArrowColor ?? "#EFE6DD", borderColor: scrollButtonArrowColor ?? "#EFE6DD" }}
-      className="fixed bottom-4 right-4 z-50 flex h-10 w-10 items-center justify-center rounded-full border-2  shadow-lg transition-transform duration-300 hover:scale-105 active:scale-95 md:bottom-6 md:right-6 md:h-12 md:w-12"
+      className="fixed bottom-4 right-4 z-50 flex h-10 w-10 items-center justify-center rounded-full border-2  shadow-lg transition-transform duration-300 hover:scale-105 active:scale-95 md:bottom-4 md:right-4 md:h-12 md:w-12"
     >
       <svg
         viewBox="0 0 24 24"

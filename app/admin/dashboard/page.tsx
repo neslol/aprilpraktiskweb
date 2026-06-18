@@ -244,6 +244,22 @@ useEffect(() => {
     }
   };
 
+  const deleteSubmission = async (id: string) => {
+  if (!confirm("Are you sure you want to delete this submission?")) return;
+
+  try {
+    // Passes the targeted item id as a query param
+    const res = await fetch(`/api/contact-submissions?id=${id}`, { method: "DELETE" });
+    if (!res.ok) throw new Error("Failed to delete submission");
+    
+    // Refresh the list immediately after a successful delete
+    await fetchSubmissions();
+  } catch (err) {
+    alert("Failed to delete submission");
+    console.error(err);
+  }
+};
+
   const filteredPages = pages.filter(p => p.path.toLowerCase().includes(search.toLowerCase()));
   const filteredUsers = users.filter(u => (u.username || "").toLowerCase().includes(search.toLowerCase()));
   const filteredSubmissions = submissions.filter(s => 
@@ -333,168 +349,6 @@ useEffect(() => {
             />
           </div>
         </div>
-
-        {/* <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-          {activeTab === "pages" ? (
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-gray-100 bg-gray-50/50 text-xs font-bold uppercase tracking-wider text-gray-500">
-                  <th className="px-6 py-4">Page Details</th>
-                  <th className="px-6 py-4">Status</th>
-                  <th className="px-6 py-4">Last Updated</th>
-                  <th className="px-6 py-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {loading ? (
-                  <tr>
-                    <td colSpan={4} className="px-6 py-12 text-center text-gray-500">
-                      <div className="flex flex-col items-center gap-2">
-                        <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600"></div>
-                        <span>Loading your pages...</span>
-                      </div>
-                    </td>
-                  </tr>
-                ) : filteredPages.length > 0 ? (
-                  filteredPages.map((page) => (
-                    <tr key={page.path} className="group hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4">
-                        <div className="flex flex-col gap-2">
-                          <Link 
-                            href={page.path} 
-                            target="_blank" 
-                            className="text-sm font-semibold text-blue-600 hover:underline"
-                          >
-                            {page.path}
-                          </Link>
-                          {page.isRoot && (
-                            <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded w-fit">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                              Root Page
-                            </span>
-                          )}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <button 
-                          onClick={() => togglePublished(page)}
-                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium shadow-sm ring-1 ring-inset transition-all ${
-                            page.published 
-                              ? "bg-green-50 text-green-700 ring-green-600/20 hover:bg-green-100" 
-                              : "bg-yellow-50 text-yellow-700 ring-yellow-600/20 hover:bg-yellow-100"
-                          }`}
-                        >
-                          <span className={`h-1.5 w-1.5 rounded-full ${page.published ? "bg-green-600" : "bg-yellow-600"}`}></span>
-                          {page.published ? "Published" : "Draft"}
-                        </button>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-500">
-                        {new Date(page.updateDate).toLocaleDateString()}
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <div className="flex items-center justify-end gap-2">
-                          <Link 
-                            href={`/admin/editor${page.path}`}
-                            className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-900 transition-all"
-                            title="Edit Content"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"/></svg>
-                          </Link>
-                          <button 
-                            onClick={() => toggleRoot(page)}
-                            className={`rounded-lg p-2 transition-all ${
-                              page.isRoot 
-                                ? "text-purple-600 bg-purple-50 hover:bg-purple-100" 
-                                : "text-gray-400 hover:bg-gray-100 hover:text-gray-900"
-                            }`}
-                            title={page.isRoot ? "Unmark as Root" : "Mark as Root"}
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                          </button>
-                          <button 
-                            onClick={() => {
-                              setIsRenaming(page.path);
-                              setNewName(page.path);
-                            }}
-                            className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-900 transition-all"
-                            title="Rename Page"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 5H9l-7 7 7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z"/><path d="M18 9l-6 6"/><path d="M12 9l6 6"/></svg>
-                          </button>
-                          <button 
-                            onClick={() => deletePage(page.path)}
-                            className="rounded-lg p-2 text-gray-400 hover:bg-red-50 hover:text-red-600 transition-all"
-                            title="Delete Page"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={4} className="px-6 py-12 text-center text-gray-500 italic">
-                      {search ? "No pages match your search." : "No pages found. Start by creating one!"}
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          ) : (
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-gray-100 bg-gray-50/50 text-xs font-bold uppercase tracking-wider text-gray-500">
-                  <th className="px-6 py-4">Email</th>
-                  <th className="px-6 py-4">Role</th>
-                  <th className="px-6 py-4">Created At</th>
-                  <th className="px-6 py-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {loading ? (
-                  <tr>
-                    <td colSpan={4} className="px-6 py-12 text-center text-gray-500">
-                      <div className="flex flex-col items-center gap-2">
-                        <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600"></div>
-                        <span>Loading users...</span>
-                      </div>
-                    </td>
-                  </tr>
-                ) : filteredUsers.length > 0 ? (
-                  filteredUsers.map((user) => (
-                    <tr key={user.id} className="group hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 text-sm font-semibold">{user.username || (user as any).email}</td>
-                      <td className="px-6 py-4">
-                        <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
-                          {user.role}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-500">
-                        {new Date(user.createdAt).toLocaleDateString()}
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <button 
-                          onClick={() => deleteUser(user.id)}
-                          className="rounded-lg p-2 text-gray-400 hover:bg-red-50 hover:text-red-600 transition-all"
-                          title="Delete User"
-                        >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={4} className="px-6 py-12 text-center text-gray-500 italic">
-                      {search ? "No users match your search." : "No users found."}
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          )}
-        </div> */}
         <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
   {activeTab === "pages" && (
     <table className="w-full text-left border-collapse">
@@ -658,53 +512,67 @@ useEffect(() => {
     </table>
   )}
 
-  {activeTab === "submissions" && (
-    <table className="w-full text-left border-collapse">
-      <thead>
-        <tr className="border-b border-gray-100 bg-gray-50/50 text-xs font-bold uppercase tracking-wider text-gray-500">
-          <th className="px-6 py-4">Contact</th>
-          <th className="px-6 py-4">Message</th>
-          <th className="px-6 py-4">Submitted At</th>
+{activeTab === "submissions" && (
+  <table className="w-full text-left border-collapse">
+    <thead>
+      <tr className="border-b border-gray-100 bg-gray-50/50 text-xs font-bold uppercase tracking-wider text-gray-500">
+        <th className="px-6 py-4">Sender</th>
+        <th className="px-6 py-4">Message</th>
+        <th className="px-6 py-4">Submitted At</th>
+        <th className="px-6 py-4 text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody className="divide-y divide-gray-100">
+      {loading ? (
+        <tr>
+          <td colSpan={4} className="px-6 py-12 text-center text-gray-500">
+            <div className="flex flex-col items-center gap-2">
+              <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600"></div>
+              <span>Loading submissions...</span>
+            </div>
+          </td>
         </tr>
-      </thead>
-      <tbody className="divide-y divide-gray-100">
-        {loading ? (
-          <tr>
-            <td colSpan={3} className="px-6 py-12 text-center text-gray-500">
-              <div className="flex flex-col items-center gap-2">
-                <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600"></div>
-                <span>Loading submissions...</span>
-              </div>
+      ) : filteredSubmissions.length > 0 ? (
+        filteredSubmissions.map((sub) => (
+          <tr key={sub.id} className="group hover:bg-gray-50 transition-colors">
+            <td className="px-6 py-4">
+              <div className="text-sm font-semibold text-gray-900">{sub.name}</div>
+              <div className="text-xs text-gray-500">{sub.email}</div>
+              {sub.phone && <div className="text-xs text-gray-400">{sub.phone}</div>}
+            </td>
+            <td className="px-6 py-4 text-sm text-gray-600 max-w-xs break-words">
+              {sub.message}
+            </td>
+            <td className="px-6 py-4 text-sm text-gray-500">
+              {new Date(sub.createdAt).toLocaleDateString()}
+            </td>
+            <td className="px-6 py-4 text-right">
+              <button 
+                onClick={() => deleteSubmission(sub.id)}
+                className="rounded-lg p-2 text-gray-400 hover:bg-red-50 hover:text-red-600 transition-all"
+                title="Delete Submission"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 6h18" />
+                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                  <line x1="10" x2="10" y1="11" y2="17" />
+                  <line x1="14" x2="14" y1="11" y2="17" />
+                </svg>
+              </button>
             </td>
           </tr>
-        ) : filteredSubmissions.length > 0 ? (
-          filteredSubmissions.map((sub) => (
-            <tr key={sub.id} className="group hover:bg-gray-50 transition-colors">
-              <td className="px-6 py-4 vertical-align-top">
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-sm font-semibold text-gray-900">{sub.name}</span>
-                  <span className="text-xs text-gray-500">{sub.email}</span>
-                  {sub.phone && <span className="text-xs text-gray-400">{sub.phone}</span>}
-                </div>
-              </td>
-              <td className="px-6 py-4 text-sm text-gray-600 max-w-md whitespace-pre-wrap">
-                {sub.message}
-              </td>
-              <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                {sub.createdAt ? new Date(sub.createdAt).toLocaleDateString() : "N/A"}
-              </td>
-            </tr>
-          ))
-        ) : (
-          <tr>
-            <td colSpan={3} className="px-6 py-12 text-center text-gray-500 italic">
-              {search ? "No submissions match your search." : "No contact submissions found."}
-            </td>
-          </tr>
-        )}
-      </tbody>
-    </table>
-  )}
+        ))
+      ) : (
+        <tr>
+          <td colSpan={4} className="px-6 py-12 text-center text-gray-500 italic">
+            {search ? "No submissions match your search." : "No submissions found."}
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+)}
 </div>
       </div>
 
