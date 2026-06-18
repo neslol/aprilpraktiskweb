@@ -12,6 +12,7 @@ import Footer, { FooterProps } from "@/app/Footer";
 import ScrollButton, {ScrollButtonProps} from "./app/ScrollButton";
 import LaunchHero, { LaunchHeroProps } from "./app/LaunchHero";
 import Contact, { ContactProps } from "./app/Contact";
+import ContactSec, { ContactSecProps } from "./app/ContactSec";
 
 const ColorPicker = ({
     value,
@@ -97,6 +98,7 @@ type Props = {
     Footer: FooterProps;
     "Split Screen Hero": LaunchHeroProps;
     Contact: ContactProps;
+    "Contact Section": ContactSecProps;
 };
 
 const config: Config<Props> = {
@@ -105,7 +107,7 @@ const config: Config<Props> = {
         Layout: { components: ["Columns"] },
         Typography: { components: ["Text"] },
         Media: { components: ["Image", "Lightbox"] },
-        Sections: { components: ["Hero", "Split Screen Hero", "Main Section", "Call To Action Section", "Background Section"] },
+        Sections: { components: ["Hero", "Split Screen Hero", "Main Section", "Call To Action Section", "Background Section", "Contact Section"] },
         Navigation: { components: ["Heading", "Scroll Button", "Footer"] },
         Interactive: { components: ["Accordion", "Button", "Contact"] }
     },
@@ -191,67 +193,90 @@ const config: Config<Props> = {
         },
 
         Accordion: {
-            fields: {
+    fields: {
+        title: {
+            type: "text",
+            label: "Accordion Section Title",
+        },
+        // --- TOGGLE 1: Title Border ---
+        showTitleBorder: {
+            type: "custom",
+            label: "Vis linje under titlen",
+            render: BooleanToggle,
+        },
+        description: {
+            type: "textarea",
+            label: "Section Description",
+        },
+        // --- TOGGLE 2: Top Frame Line ---
+        showTopBorder: {
+            type: "custom",
+            label: "Vis linje i toppen af listen",
+            render: BooleanToggle,
+        },
+        // --- TOGGLE 3: Item Separator Lines ---
+        showItemBorders: {
+            type: "custom",
+            label: "Vis linjer mellem elementer",
+            render: BooleanToggle,
+        },
+        bgColor: {
+            type: "custom",
+            label: "Background Color",
+            render: ColorPicker,
+        },
+        textColor: {
+            type: "custom",
+            label: "Text Color",
+            render: ColorPicker,
+        },
+        items: {
+            type: "array",
+            label: "Accordion Items",
+            getItemSummary: (item) => item.title || "Untitled Accordion Item",
+            arrayFields: {
                 title: {
                     type: "text",
-                    label: "Accordion Section Title",
+                    label: "Tab Trigger Title",
                 },
-                description: {
+                heading: {
+                    type: "text",
+                    label: "Inner Content Heading",
+                },
+                text: {
                     type: "textarea",
-                    label: "Section Description",
+                    label: "Inner Content Body Text",
                 },
-                bgColor: {
-                    type: "custom",
-                    label: "Background Color",
-                    render: ColorPicker,
-                },
-                textColor: {
-                    type: "custom",
-                    label: "Text Color",
-                    render: ColorPicker,
-                },
-                items: {
-                    type: "array",
-                    label: "Accordion Items",
-                    // getItemSummary shows the title of the individual pane dynamically in the puck editor listing
-                    getItemSummary: (item) => item.title || "Untitled Accordion Item",
-                    arrayFields: {
-                        title: {
-                            type: "text",
-                            label: "Tab Trigger Title",
-                        },
-                        heading: {
-                            type: "text",
-                            label: "Inner Content Heading",
-                        },
-                        text: {
-                            type: "textarea",
-                            label: "Inner Content Body Text",
-                        },
-                    }
-                },
-            },
-            render: ({title, description, items = [], bgColor, textColor}) => (
-                    <Accordion
-                        title={title}
-                        description={description}
-                        items={items}
-                        bgColor={bgColor}
-                        textColor={textColor}
-                    />
-                ),
-                defaultProps: {
-                title: "Frequently Asked Questions",
-                description: "Here are some of our FAQs. If you have any other quesitons you'd like answered please feel free to email us.",
-                bgColor: "#f9f9f9",
-                textColor: "#111111",
-                items: [
-                    { title: "What is your return policy?", heading: "Return Policy", text: "You can return any item within 30 days of purchase for a full refund." },
-                    { title: "Do you offer international shipping?", heading: "International Shipping", text: "Yes, we ship to most countries worldwide. Shipping costs will apply, and will be added at checkout." },
-                    { title: "How can I track my order?", heading: "Order Tracking", text: "Once your order has shipped, we will send you an email with the tracking information." },
-                ],
-            },
+            }
         },
+    },
+    render: ({title, description, items = [], showTitleBorder, showTopBorder, showItemBorders, bgColor, textColor}) => (
+        <Accordion
+            title={title}
+            description={description}
+            items={items}
+            showTitleBorder={showTitleBorder}
+            showTopBorder={showTopBorder}
+            showItemBorders={showItemBorders}
+            bgColor={bgColor}
+            textColor={textColor}
+        />
+    ),
+    defaultProps: {
+        title: "Frequently Asked Questions",
+        description: "Here are some of our FAQs. If you have any other questions you'd like answered please feel free to email us.",
+        showTitleBorder: true,
+        showTopBorder: true,
+        showItemBorders: true,
+        bgColor: "#f9f9f9",
+        textColor: "#111111",
+        items: [
+            { title: "What is your return policy?", heading: "Return Policy", text: "You can return any item within 30 days of purchase for a full refund." },
+            { title: "Do you offer international shipping?", heading: "International Shipping", text: "Yes, we ship to most countries worldwide. Shipping costs will apply, and will be added at checkout." },
+            { title: "How can I track my order?", heading: "Order Tracking", text: "Once your order has shipped, we will send you an email with the tracking information." },
+        ],
+    },
+},
         Heading: {
             fields: {
                 editorPreviewOpen: {
@@ -521,6 +546,11 @@ const config: Config<Props> = {
                     label: "Component Text Color",
                     render: ColorPicker,
                 },
+                showBorder: {
+                    type: "custom",
+                    label: "Show line under text",
+                    render: BooleanToggle,
+                },
                 reverseLayout: {
                     type: "custom",
                     label: "Reverse Layout Alignment",
@@ -550,7 +580,7 @@ const config: Config<Props> = {
                     label: "Action Button Link destination",
                 },
             },
-            render: ({title, text, imageUrl, imageAlt, bgColor, textColor, reverseLayout, buttonToggle, buttonText, buttonBgColor, buttonTextColor, buttonHref}) => (
+            render: ({title, text, imageUrl, imageAlt, bgColor, textColor, reverseLayout, buttonToggle, buttonText, buttonBgColor, buttonTextColor, buttonHref, showBorder}) => (
                     <MainSec
                         title={title}
                         text={text}
@@ -564,6 +594,7 @@ const config: Config<Props> = {
                         buttonBgColor={buttonBgColor}
                         buttonTextColor={buttonTextColor}
                         buttonHref={buttonHref}
+                        showBorder={showBorder}
                     />
                 ),
                 defaultProps: {
@@ -579,6 +610,7 @@ const config: Config<Props> = {
                 buttonBgColor: "#2563eb",
                 buttonTextColor: "#ffffff",
                 buttonHref: "#",
+                showBorder: true,
             },
         },
         "Call To Action Section": {
@@ -616,6 +648,12 @@ const config: Config<Props> = {
                     label: "Layout Font Color",
                     render: ColorPicker,
                 },
+                                showBorder: {
+                    type: "custom",
+                    label: "Show Border",
+                    render: BooleanToggle,
+                },
+
                 imageUrl: {
                     type: "custom",
                     label: "Accompanying Asset Image",
@@ -626,7 +664,7 @@ const config: Config<Props> = {
                     label: "Asset Image Alternative Description",
                 },
             },
-            render: ({title, points, buttonText, buttonColor, bgColor, textColor, imageUrl, imageAlt}) => (
+            render: ({title, points, buttonText, buttonColor, bgColor, textColor, imageUrl, imageAlt, showBorder}) => (
                     <CtaSec
                         title={title}
                         points={points}
@@ -636,6 +674,7 @@ const config: Config<Props> = {
                         textColor={textColor}
                         imageUrl={imageUrl}
                         imageAlt={imageAlt}
+                        showBorder={showBorder}
                     />
                 ),
                 defaultProps: {
@@ -647,6 +686,7 @@ const config: Config<Props> = {
                 textColor: "#111111",
                 imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
                 imageAlt: "Placeholder image",
+                showBorder: true,
             },
         },
         "Background Section": {
@@ -669,13 +709,19 @@ const config: Config<Props> = {
                     label: "Overlay Typography Color",
                     render: ColorPicker,
                 },
+                showBorder: {
+                    type: "custom",
+                    label: "Show Border",
+                    render: BooleanToggle,
+                },
             },
-            render: ({bgImageUrl,title, text, textColor}) => (
+            render: ({bgImageUrl,title, text, textColor, showBorder}) => (
                     <BgSec
                         bgImageUrl={bgImageUrl}
                         title={title}
                         text={text} 
                         textColor={textColor}
+                        showBorder={showBorder}
                     />
                 ),
             defaultProps: {
@@ -683,6 +729,7 @@ const config: Config<Props> = {
                 title: "Background Section",
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 textColor: "#ffffff",
+                showBorder: true,
             },
         },
         Button: {
@@ -876,6 +923,70 @@ const config: Config<Props> = {
             },
         },
         
+        "Contact Section": {
+    fields: {
+        namePlaceholder: {
+            type: "text",
+            label: "Navn placeholder",
+        },
+        emailPlaceholder: {
+            type: "text",
+            label: "Email placeholder",
+        },
+        phonePlaceholder: {
+            type: "text",
+            label: "Tlf.nr. placeholder",
+        },
+        messagePlaceholder: {
+            type: "text",
+            label: "Besked el.lign placeholder",
+        },
+        primaryBgColor: {
+            type: "custom",
+            label: "Baggrundsfarve",
+            render: ColorPicker,
+        },
+        accentBgColor: {
+            type: "custom",
+            label: "Knap baggrundsfarve",
+            render: ColorPicker,
+        },
+        accentBgHoverColor: {
+            type: "custom",
+            label: "Knap baggrundsfarve (Hover)",
+            render: ColorPicker,
+        },
+        accentFocusColor: {
+            type: "custom",
+            label: "Input felt fokusfarve",
+            render: ColorPicker,
+        },
+    },
+    render: ({ namePlaceholder, emailPlaceholder, phonePlaceholder, messagePlaceholder, primaryBgColor, accentBgColor, accentBgHoverColor, accentFocusColor }) => {
+        return (
+            <ContactSec
+                namePlaceholder={namePlaceholder}
+                emailPlaceholder={emailPlaceholder}
+                phonePlaceholder={phonePlaceholder}
+                messagePlaceholder={messagePlaceholder}
+                primaryBgColor={primaryBgColor}
+                accentBgColor={accentBgColor}
+                accentBgHoverColor={accentBgHoverColor}
+                accentFocusColor={accentFocusColor}
+            />
+        );
+    },
+    defaultProps: {
+        namePlaceholder: "Navne Navnesen",
+        emailPlaceholder: "navne@navnesen.dk",
+        phonePlaceholder: "12345678",
+        messagePlaceholder: "Din besked",
+        primaryBgColor: "#0f172a",      // Matcher dit mørke Tailwind tema
+        accentBgColor: "#f7b801",       // Matcher dine CTA kommentarer
+        accentBgHoverColor: "#ffd24d",
+        accentFocusColor: "#f7b801",
+    },
+},
 
         Footer: {
           fields: {

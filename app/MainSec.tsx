@@ -1,4 +1,3 @@
-import H2 from "./H2"
 import Button from "./Button"
 
 export type MainSecProps = {
@@ -14,10 +13,10 @@ export type MainSecProps = {
   buttonBgColor?: string;
   buttonTextColor?: string;
   buttonHref?: string;
-
+  showBorder?: boolean;
 }
 
-const MainSec = ({bgColor, textColor, title, text, imageUrl, imageAlt, reverseLayout, buttonToggle, buttonText, buttonBgColor, buttonTextColor, buttonHref}: MainSecProps) => {
+const MainSec = ({bgColor, textColor, title, text, imageUrl, imageAlt, reverseLayout, buttonToggle, buttonText, buttonBgColor, buttonTextColor, buttonHref, showBorder}: MainSecProps) => {
   const textColumnOrder = reverseLayout ? "md:order-2" : "md:order-1";
   const imageColumnOrder = reverseLayout ? "md:order-1" : "md:order-2";
   const imageAlignment = reverseLayout ? "md:justify-self-start" : "md:justify-self-end";
@@ -27,7 +26,13 @@ const MainSec = ({bgColor, textColor, title, text, imageUrl, imageAlt, reverseLa
     <section style={{ backgroundColor: bgColor, color: textColor }} className={`p-5 md:p-0 md:px-10 lg:px-20 xl:px-40 md:grid md:grid-cols-2 md:max-h-150 md:gap-5`}>
       <img className={`m-auto py-5 w-full md:max-w-160 h-auto md:m-0 ${imageColumnOrder} ${imageAlignment}`} src={imageUrl} alt={imageAlt} />
       <div className={`flex flex-col justify-center ${textColumnOrder} ${textAlignment} `}>
-        <H2>{title}</H2>
+      <h2 className={`text-center h-15 lg:h-20 2xl:h-27 text-[32px] lg:text-[48px] 2xl:text-[64px]`}>
+        {title}
+        </h2>
+            {showBorder && (
+              <div className={`w-full h-0.5 bg-white mx-auto mb-2`} />
+            )}
+
         <p className="text-xl md:px-5 md:pb-5">{text}</p>
         <div className={`flex ${reverseLayout ? "md:justify-end" : "md:justify-start"}`}>
         {buttonToggle && (
